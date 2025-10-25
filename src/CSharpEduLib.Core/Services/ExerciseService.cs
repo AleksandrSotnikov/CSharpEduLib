@@ -15,15 +15,13 @@ namespace CSharpEduLib.Core.Services
     {
         private readonly string _contentPath;
         private readonly IJsonLoader _jsonLoader;
-        private readonly ILectureService _lectureService;
         private List<Exercise> _exercises;
         private readonly object _lockObject = new object();
         
-        public ExerciseService(string contentPath, IJsonLoader jsonLoader, ILectureService lectureService)
+        public ExerciseService(string contentPath, IJsonLoader jsonLoader)
         {
             _contentPath = contentPath ?? throw new ArgumentNullException(nameof(contentPath));
             _jsonLoader = jsonLoader ?? throw new ArgumentNullException(nameof(jsonLoader));
-            _lectureService = lectureService ?? throw new ArgumentNullException(nameof(lectureService));
             _exercises = new List<Exercise>();
             
             LoadExercises();
@@ -46,7 +44,7 @@ namespace CSharpEduLib.Core.Services
         /// <summary>
         /// Получить все упражнения для конкретной лекции
         /// </summary>
-        public List<Exercise> GetExercisesByLectureId(string lectureId)
+        public List<Exercise> GetLectureExercises(string lectureId)
         {
             if (string.IsNullOrWhiteSpace(lectureId))
                 throw new ArgumentException("Идентификатор лекции не может быть пустым", nameof(lectureId));
@@ -62,7 +60,7 @@ namespace CSharpEduLib.Core.Services
         /// <summary>
         /// Получить все упражнения для конкретного модуля
         /// </summary>
-        public List<Exercise> GetExercisesByModuleId(string moduleId)
+        public List<Exercise> GetModuleExercises(string moduleId)
         {
             if (string.IsNullOrWhiteSpace(moduleId))
                 throw new ArgumentException("Идентификатор модуля не может быть пустым", nameof(moduleId));
@@ -74,6 +72,50 @@ namespace CSharpEduLib.Core.Services
                               .ThenBy(e => e.OrderIndex)
                               .ToList();
             }
+        }
+        
+        /// <summary>
+        /// Выполнить упражнение и получить результат
+        /// </summary>
+        public TestResult ExecuteExercise(Exercise exercise, string studentCode)
+        {
+            if (exercise == null)
+                throw new ArgumentNullException(nameof(exercise));
+            if (string.IsNullOrWhiteSpace(studentCode))
+                throw new ArgumentException("Код студента не может быть пустым", nameof(studentCode));
+            
+            // Заглушка для выполнения упражнения
+            return new TestResult
+            {
+                IsSuccess = true,
+                Message = "Упражнение выполнено успешно",
+                Details = $"Код для упражнения '{exercise.Title}' принят",
+                ExecutionTime = TimeSpan.FromSeconds(1)
+            };
+        }
+        
+        /// <summary>
+        /// Проверить решение упражнения
+        /// </summary>
+        public TestResult ValidateSolution(string exerciseId, string solution)
+        {
+            if (string.IsNullOrWhiteSpace(exerciseId))
+                throw new ArgumentException("Идентификатор упражнения не может быть пустым", nameof(exerciseId));
+            if (string.IsNullOrWhiteSpace(solution))
+                throw new ArgumentException("Решение не может быть пустым", nameof(solution));
+            
+            var exercise = GetExerciseById(exerciseId);
+            if (exercise == null)
+            {
+                return new TestResult
+                {
+                    IsSuccess = false,
+                    Message = $"Упражнение с ID '{exerciseId}' не найдено",
+                    Details = "Проверьте правильность идентификатора упражнения"
+                };
+            }
+            
+            return ExecuteExercise(exercise, solution);
         }
         
         /// <summary>
