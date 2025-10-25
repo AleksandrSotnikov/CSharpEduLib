@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CSharpEduLib.Core.Models;
 
 namespace CSharpEduLib.Core.Interfaces
 {
@@ -41,23 +42,5 @@ namespace CSharpEduLib.Core.Interfaces
         /// <param name="markdown">Markdown текст</param>
         /// <returns>HTML текст</returns>
         string ConvertToHtml(string markdown);
-    }
-    
-    /// <summary>
-    /// Заголовок Markdown
-    /// </summary>
-    public class Header
-    {
-        public int Level { get; set; }
-        public string Text { get; set; }
-    }
-    
-    /// <summary>
-    /// Блок кода Markdown
-    /// </summary>
-    public class CodeBlock
-    {
-        public string Language { get; set; }
-        public string Code { get; set; }
     }
 }
