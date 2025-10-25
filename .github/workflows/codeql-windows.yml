@@ -17,22 +17,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp
+          build-mode: manual
+
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v2
 
-      - name: Restore
+      - name: Restore NuGet Packages
         run: nuget restore CSharpEduLib.sln
 
-      - name: Build (Release)
-        run: msbuild CSharpEduLib.sln /t:Rebuild /p:Configuration=Release
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: csharp
+      - name: Build Solution (Release)
+        run: msbuild CSharpEduLib.sln /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:RestorePackages=true
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
