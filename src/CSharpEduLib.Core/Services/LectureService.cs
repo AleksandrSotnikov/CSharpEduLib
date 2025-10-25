@@ -79,7 +79,7 @@ namespace CSharpEduLib.Core.Services
         
         public int GetLectureCount()
         {
-            lock (_lock_object)
+            lock (_lockObject)
             {
                 return _lectures.Count;
             }
