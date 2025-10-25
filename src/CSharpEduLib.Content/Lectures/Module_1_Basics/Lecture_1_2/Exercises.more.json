@@ -1,0 +1,9 @@
+[
+  {"Id":"m1l2-ex6","Title":"Разность int","Description":"Считайте два int и выведите разность a-b","Requirements":"int.Parse","Example":"10 и 3 -> 7","MaxScore":10,"Difficulty":1,"Order":6},
+  {"Id":"m1l2-ex7","Title":"Произведение double","Description":"Считайте два double и выведите произведение","Requirements":"Учитывать десятичный разделитель","Example":"1.5 и 2 -> 3","MaxScore":10,"Difficulty":2,"Order":7},
+  {"Id":"m1l2-ex8","Title":"Целая часть","Description":"Считайте double и выведите целую часть","Requirements":"(int)x","Example":"3.9 -> 3","MaxScore":10,"Difficulty":2,"Order":8},
+  {"Id":"m1l2-ex9","Title":"Округление","Description":"Считайте double и выведите округленное значение","Requirements":"Math.Round(x)","Example":"2.49 -> 2","MaxScore":10,"Difficulty":2,"Order":9},
+  {"Id":"m1l2-ex10","Title":"Булев результат","Description":"Считайте два int и выведите true, если a>b","Requirements":"bool и Console.WriteLine","Example":"5 и 3 -> true","MaxScore":10,"Difficulty":1,"Order":10},
+  {"Id":"m1l2-ex11","Title":"Код символа","Description":"Считайте символ и выведите его код","Requirements":"(int)char","Example":"'A' -> 65","MaxScore":10,"Difficulty":2,"Order":11},
+  {"Id":"m1l2-ex12","Title":"Строка и число","Description":"Считайте строку и число, выведите 'str=N'","Requirements":"Интерполяция","Example":"Hello и 7 -> str=Hello, N=7","MaxScore":10,"Difficulty":1,"Order":12}
+]
