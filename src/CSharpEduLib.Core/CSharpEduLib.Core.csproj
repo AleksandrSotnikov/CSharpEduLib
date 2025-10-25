@@ -44,20 +44,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <!-- Interfaces -->
+    <Compile Include="Interfaces\ICompilationService.cs" />
+    <Compile Include="Interfaces\IExerciseService.cs" />
+    <Compile Include="Interfaces\ILectureService.cs" />
+    <Compile Include="Interfaces\ITestExecutor.cs" />
+
+    <!-- Models -->
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\CodeExample.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\TestResult.cs" />
     <Compile Include="Models\StudentProgress.cs" />
+
+    <!-- Services -->
     <Compile Include="Services\LectureService.cs" />
     <Compile Include="Services\ExerciseService.cs" />
     <Compile Include="Services\TestExecutor.cs" />
     <Compile Include="Services\ProgressTracker.cs" />
+    <Compile Include="Services\RoslynCompilationService.cs" />
+
+    <!-- Validators -->
     <Compile Include="Validators\CodeValidator.cs" />
     <Compile Include="Validators\ExerciseValidator.cs" />
+
+    <!-- Utils -->
     <Compile Include="Utils\JsonLoader.cs" />
     <Compile Include="Utils\MarkdownParser.cs" />
     <Compile Include="Utils\Helpers.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
