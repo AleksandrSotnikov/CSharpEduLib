@@ -11,7 +11,7 @@ namespace CSharpEduLib.Core.Services
     /// <summary>
     /// Сервис для управления лекциями (усилен предвалидацией JSON, улучшенным извлечением заголовка и сообщениями об ошибках)
     /// </summary>
-    public class LectureService : ILectureService
+    public partial class LectureService : ILectureService
     {
         private readonly string _contentPath;
         private readonly IJsonLoader _jsonLoader;
@@ -79,7 +79,7 @@ namespace CSharpEduLib.Core.Services
         
         public int GetLectureCount()
         {
-            lock (_lockObject)
+            lock (_lock_object)
             {
                 return _lectures.Count;
             }
