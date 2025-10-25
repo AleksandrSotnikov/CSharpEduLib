@@ -5,12 +5,11 @@ using System.Linq;
 using CSharpEduLib.Core.Interfaces;
 using CSharpEduLib.Core.Models;
 using CSharpEduLib.Core.Utils;
-using Newtonsoft.Json;
 
 namespace CSharpEduLib.Core.Services
 {
     /// <summary>
-    /// Сервис для управления лекциями
+    /// Сервис для управления лекциями (усилен предвалидацией JSON, улучшенным извлечением заголовка и сообщениями об ошибках)
     /// </summary>
     public class LectureService : ILectureService
     {
@@ -115,7 +114,7 @@ namespace CSharpEduLib.Core.Services
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Ошибка при загрузке лекции {lectureDir}: {ex.Message}");
+                        Console.WriteLine($"[LectureService] Ошибка при загрузке лекции '{lectureDir}': {ex.Message}");
                     }
                 }
             }
@@ -134,16 +133,19 @@ namespace CSharpEduLib.Core.Services
             
             if (!File.Exists(theoryFile))
             {
-                Console.WriteLine($"Не найден файл теории: {theoryFile}");
+                Console.WriteLine($"[LectureService] Не найден файл теории: {theoryFile}");
                 return null;
             }
+            
+            // Извлечение заголовка с учетом #/##/###
+            var title = ExtractTitleFromMarkdown(theoryFile);
             
             var lecture = new Lecture
             {
                 Id = $"{moduleId}_{lectureName}",
                 ModuleId = moduleId,
-                Title = ExtractTitleFromMarkdown(theoryFile),
-                Description = "",
+                Title = title,
+                Description = string.Empty,
                 Content = _markdownParser.ParseFile(theoryFile),
                 Examples = new List<CodeExample>(),
                 OrderIndex = ExtractOrderFromLectureName(lectureName)
@@ -153,14 +155,23 @@ namespace CSharpEduLib.Core.Services
             {
                 try
                 {
-                    var examplesJson = File.ReadAllText(examplesFile);
-                    var examples = JsonConvert.DeserializeObject<List<CodeExample>>(examplesJson);
-                    lecture.Examples = examples ?? new List<CodeExample>();
+                    var json = File.ReadAllText(examplesFile);
+                    if (!_jsonLoader.IsValidJson(json))
+                    {
+                        throw new InvalidOperationException($"Некорректный JSON в '{examplesFile}'. Проверьте синтаксис.");
+                    }
+                    var examples = _jsonLoader.LoadFromString<List<CodeExample>>(json) ?? new List<CodeExample>();
+                    lecture.Examples = examples;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Ошибка при загрузке примеров: {ex.Message}");
+                    Console.WriteLine($"[LectureService] Ошибка при загрузке примеров '{examplesFile}': {ex.Message}");
                 }
+            }
+            else
+            {
+                // Не критично, просто уведомление для разработчика/контента
+                Console.WriteLine($"[LectureService] Файл примеров отсутствует: {examplesFile}");
             }
             
             return lecture;
@@ -170,12 +181,17 @@ namespace CSharpEduLib.Core.Services
         {
             try
             {
-                var lines = File.ReadAllLines(filePath);
-                var titleLine = lines.FirstOrDefault(l => l.StartsWith("# "));
-                return titleLine?.Substring(2).Trim() ?? "Неизвестная лекция";
+                var content = _markdownParser.ParseFile(filePath);
+                var headers = _markdownParser.ExtractHeaders(content);
+                // Приоритет: # затем ## затем ###
+                var title = headers
+                    .OrderBy(h => h.Level) // 1,2,3 ...
+                    .FirstOrDefault()?.Text;
+                return string.IsNullOrWhiteSpace(title) ? "Неизвестная лекция" : title.Trim();
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"[LectureService] Не удалось извлечь заголовок из '{filePath}': {ex.Message}");
                 return "Неизвестная лекция";
             }
         }
