@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using CSharpEduLib.Core.Interfaces;
+using CSharpEduLib.Core.Models;
 
 namespace CSharpEduLib.Core.Utils
 {
