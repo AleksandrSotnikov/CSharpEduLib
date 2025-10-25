@@ -181,13 +181,17 @@ namespace CSharpEduLib.Core.Services
         {
             try
             {
-                var content = _markdownParser.ParseFile(filePath);
-                var headers = _markdownParser.ExtractHeaders(content);
-                // Приоритет: # затем ## затем ###
-                var title = headers
-                    .OrderBy(h => h.Level) // 1,2,3 ...
-                    .FirstOrDefault()?.Text;
-                return string.IsNullOrWhiteSpace(title) ? "Неизвестная лекция" : title.Trim();
+                // Простое чтение файла и поиск первого заголовка
+                var lines = File.ReadAllLines(filePath);
+                foreach (var line in lines)
+                {
+                    var trimmed = line.Trim();
+                    if (trimmed.StartsWith("#"))
+                    {
+                        return trimmed.TrimStart('#').Trim();
+                    }
+                }
+                return "Неизвестная лекция";
             }
             catch (Exception ex)
             {
