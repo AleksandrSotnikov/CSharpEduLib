@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using CSharpEduLib.Core.Interfaces;
 
 namespace CSharpEduLib.Core.Utils
 {
@@ -133,17 +134,5 @@ namespace CSharpEduLib.Core.Utils
                 .Replace("\"", "&quot;")
                 .Replace("'", "&#39;");
         }
-    }
-
-    public class CodeBlock
-    {
-        public string Language { get; set; }
-        public string Code { get; set; }
-    }
-
-    public class Header
-    {
-        public int Level { get; set; }
-        public string Text { get; set; }
     }
 }
