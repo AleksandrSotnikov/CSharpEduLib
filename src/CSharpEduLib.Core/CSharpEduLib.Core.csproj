@@ -44,9 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <!-- Test file -->
-    <Compile Include="Test.cs" />
-    
     <!-- Interfaces -->
     <Compile Include="Interfaces\ICompilationService.cs" />
     <Compile Include="Interfaces\IExerciseService.cs" />
