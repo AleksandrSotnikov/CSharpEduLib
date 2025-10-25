@@ -10,12 +10,34 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-      - name: Restore
-        run: dotnet restore
+      
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+        
+      - name: Setup VSTest
+        uses: darenm/Setup-VSTest@v1
+        
+      - name: Restore NuGet packages
+        run: nuget restore CSharpEduLib.sln
+        
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: msbuild CSharpEduLib.sln /p:Configuration=Release /p:Platform="Any CPU" /p:RestorePackages=true
+        
       - name: Test
-        run: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage"
+        shell: powershell
+        run: |
+          # Find test assemblies in Release build output
+          $tests = Get-ChildItem -Recurse -Filter *.Tests.dll | Where-Object { $_.FullName -match "\\bin\\Release\\" -and $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          
+          if (-not $tests) {
+            Write-Host "No test assemblies found"
+            exit 1
+          }
+          
+          foreach ($t in $tests) {
+            Write-Host "Running tests: $($t.FullName)"
+            vstest.console.exe "$($t.FullName)" /Framework:.NETFramework,Version=v4.8
+          }
