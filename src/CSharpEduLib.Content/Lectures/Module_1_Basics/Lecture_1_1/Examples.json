@@ -78,4 +78,125 @@
     "Difficulty": "Beginner",
     "ExpectedOutput": "Строка с \"кавычками\"\nСтрока с \\обратным слешем\\\nСтрока\nс переносом строки\nСтрока\tс табуляцией\nC:\\Users\\Александр\\Documents\nМногострочная\nстрока без\nescape-символов\n",
     "Tags": ["strings", "escape", "verbatim"]
-  }],
+  },
+  {
+    "Id": "formatting-output",
+    "Title": "Форматирование вывода",
+    "Description": "Composite formatting и интерполяция",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        double pi = Math.PI;\n        int number = 42;\n        \n        // Различные способы форматирования\n        Console.WriteLine(\"Pi = {0}\", pi);\n        Console.WriteLine(\"Pi с 2 знаками: {0:F2}\", pi);\n        Console.WriteLine(\"Число в шестнадцатеричном: {0:X}\", number);\n        Console.WriteLine(\"Число с заполнением нулями: {0:D5}\", number);\n        \n        // Интерполяция с форматированием\n        Console.WriteLine($\"Pi = {pi:F3}\");\n        Console.WriteLine($\"Процент: {0.75:P}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Formatting",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Pi = 3.14159265358979\nPi с 2 знаками: 3.14\nЧисло в шестнадцатеричном: 2A\nЧисло с заполнением нулями: 00042\nPi = 3.142\nПроцент: 75.00 %\n",
+    "Tags": ["formatting", "composite", "interpolation"]
+  },
+  {
+    "Id": "constants",
+    "Title": "Константы",
+    "Description": "Объявление и использование констант",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        const double PI = 3.14159;\n        const string GREETING = \"Добро пожаловать!\";\n        const int MAX_USERS = 100;\n        \n        double radius = 5.0;\n        double area = PI * radius * radius;\n        \n        Console.WriteLine(GREETING);\n        Console.WriteLine($\"Радиус: {radius}\");\n        Console.WriteLine($\"Площадь круга: {area:F2}\");\n        Console.WriteLine($\"Максимум пользователей: {MAX_USERS}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Constants",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Добро пожаловать!\nРадиус: 5\nПлощадь круга: 78.54\nМаксимум пользователей: 100\n",
+    "Tags": ["const", "pi", "math"]
+  },
+  {
+    "Id": "datetime-now",
+    "Title": "Работа с датой и временем",
+    "Description": "DateTime.Now, Today и форматирование",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        DateTime now = DateTime.Now;\n        DateTime today = DateTime.Today;\n        \n        Console.WriteLine($\"Сейчас: {now}\");\n        Console.WriteLine($\"Сегодня: {today:dd.MM.yyyy}\");\n        Console.WriteLine($\"Время: {now:HH:mm:ss}\");\n        Console.WriteLine($\"День недели: {now.DayOfWeek}\");\n        Console.WriteLine($\"День года: {now.DayOfYear}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "DateTime",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "DYNAMIC\n",
+    "Tags": ["datetime", "formatting", "now"]
+  },
+  {
+    "Id": "math-ops",
+    "Title": "Математические операции",
+    "Description": "Sqrt, Pow, Max, Min, Round, Abs",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        double x = 16.0;\n        double y = 3.7;\n        \n        Console.WriteLine($\"Корень из {x}: {Math.Sqrt(x)}\");\n        Console.WriteLine($\"Степень {x}^2: {Math.Pow(x, 2)}\");\n        Console.WriteLine($\"Максимум из {x} и {y}: {Math.Max(x, y)}\");\n        Console.WriteLine($\"Минимум из {x} и {y}: {Math.Min(x, y)}\");\n        Console.WriteLine($\"Округление {y}: {Math.Round(y)}\");\n        Console.WriteLine($\"Абсолютное значение -5: {Math.Abs(-5)}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Math",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Корень из 16: 4\nСтепень 16^2: 256\nМаксимум из 16 и 3.7: 16\nМинимум из 16 и 3.7: 3.7\nОкругление 3.7: 4\nАбсолютное значение -5: 5\n",
+    "Tags": ["math", "sqrt", "pow", "round", "abs"]
+  },
+  {
+    "Id": "logical-ops",
+    "Title": "Логические операции",
+    "Description": "NOT, AND, OR и сравнения",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        bool isTrue = true;\n        bool isFalse = false;\n        \n        Console.WriteLine($\"isTrue = {isTrue}\");\n        Console.WriteLine($\"isFalse = {isFalse}\");\n        Console.WriteLine($\"НЕ isTrue = {!isTrue}\");\n        Console.WriteLine($\"isTrue И isFalse = {isTrue && isFalse}\");\n        Console.WriteLine($\"isTrue ИЛИ isFalse = {isTrue || isFalse}\");\n        \n        int a = 5, b = 10;\n        Console.WriteLine($\"{a} > {b}: {a > b}\");\n        Console.WriteLine($\"{a} < {b}: {a < b}\");\n        Console.WriteLine($\"{a} == {b}: {a == b}\");\n        Console.WriteLine($\"{a} != {b}: {a != b}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Logic",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "isTrue = True\nisFalse = False\nНЕ isTrue = False\nisTrue И isFalse = False\nisTrue ИЛИ isFalse = True\n5 > 10: False\n5 < 10: True\n5 == 10: False\n5 != 10: True\n",
+    "Tags": ["logic", "and", "or", "not", "compare"]
+  },
+  {
+    "Id": "char-ascii",
+    "Title": "Символы и ASCII",
+    "Description": "char и преобразования",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        char letter = 'А';\n        char digit = '5';\n        char symbol = '@';\n        \n        Console.WriteLine($\"Символ: {letter}, ASCII код: {(int)letter}\");\n        Console.WriteLine($\"Символ: {digit}, ASCII код: {(int)digit}\");\n        Console.WriteLine($\"Символ: {symbol}, ASCII код: {(int)symbol}\");\n        \n        int code = 65;\n        Console.WriteLine($\"ASCII {code} = '{(char)code}'\");\n        \n        Console.WriteLine($\"'{letter}' - буква? {char.IsLetter(letter)}\");\n        Console.WriteLine($\"'{digit}' - цифра? {char.IsDigit(digit)}\");\n        Console.WriteLine($\"'{symbol}' - знак препинания? {char.IsPunctuation(symbol)}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Chars",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Символ: А, ASCII код: 1040\nСимвол: 5, ASCII код: 53\nСимвол: @, ASCII код: 64\nASCII 65 = 'A'\n'А' - буква? True\n'5' - цифра? True\n'@' - знак препинания? False\n",
+    "Tags": ["char", "ascii", "unicode"]
+  },
+  {
+    "Id": "random-numbers",
+    "Title": "Генерация случайных чисел",
+    "Description": "Random.Next и NextDouble",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Random random = new Random();\n        \n        int randomInt = random.Next(0, 101);\n        Console.WriteLine($\"Случайное число (0-100): {randomInt}\");\n        \n        double randomDouble = random.NextDouble();\n        Console.WriteLine($\"Случайное дробное (0.0-1.0): {randomDouble:F3}\");\n        \n        int diceRoll = random.Next(1, 7);\n        Console.WriteLine($\"Бросок кубика: {diceRoll}\");\n        \n        Console.Write(\"5 случайных чисел: \");\n        for (int i = 0; i < 5; i++)\\n        {\\n            Console.Write($\"{random.Next(1, 11)} \");\n        }\n        Console.WriteLine();\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Random",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "DYNAMIC\n",
+    "Tags": ["random", "next", "nextdouble"]
+  },
+  {
+    "Id": "assign-ops",
+    "Title": "Операции присваивания",
+    "Description": "+=, -=, *=, /=, %= и инкремент/декремент",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        int x = 10;\n        Console.WriteLine($\"Начальное значение x: {x}\");\n        \n        x += 5;\n        Console.WriteLine($\"x += 5: {x}\");\n        \n        x -= 3;\n        Console.WriteLine($\"x -= 3: {x}\");\n        \n        x *= 2;\n        Console.WriteLine($\"x *= 2: {x}\");\n        \n        x /= 4;\n        Console.WriteLine($\"x /= 4: {x}\");\n        \n        x %= 3;\n        Console.WriteLine($\"x %= 3: {x}\");\n        \n        Console.WriteLine($\"x++: {x++}\");\n        Console.WriteLine($\"Теперь x: {x}\");\n        Console.WriteLine($\"++x: {++x}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Operators",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Начальное значение x: 10\nx += 5: 15\nx -= 3: 12\nx *= 2: 24\nx /= 4: 6\nx %= 3: 0\nx++: 0\nТеперь x: 1\n++x: 2\n",
+    "Tags": ["operators", "increment", "decrement"]
+  },
+  {
+    "Id": "strings-basics",
+    "Title": "Работа со строками",
+    "Description": "Конкатенация, свойства, проверки, подстроки",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        string firstName = \"Иван\";\n        string lastName = \"Петров\";\n        \n        string fullName = firstName + \" \" + lastName;\n        Console.WriteLine($\"Полное имя: {fullName}\");\n        \n        Console.WriteLine($\"Длина имени: {fullName.Length}\");\n        Console.WriteLine($\"Верхний регистр: {fullName.ToUpper()}\");\n        Console.WriteLine($\"Нижний регистр: {fullName.ToLower()}\");\n        \n        Console.WriteLine($\"Начинается с 'Иван'? {fullName.StartsWith(\"Иван\")}\");\n        Console.WriteLine($\"Содержит 'Пет'? {fullName.Contains(\"Пет\")}\");\n        Console.WriteLine($\"Заканчивается на 'ов'? {fullName.EndsWith(\"ов\")}\");\n        \n        Console.WriteLine($\"Первые 4 символа: {fullName.Substring(0, 4)}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Strings",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Полное имя: Иван Петров\nДлина имени: 10\nВерхний регистр: ИВАН ПЕТРОВ\nНижний регистр: иван петров\nНачинается с 'Иван'? True\nСодержит 'Пет'? True\nЗаканчивается на 'ов'? True\nПервые 4 символа: Иван\n",
+    "Tags": ["strings", "properties", "substring"]
+  },
+  {
+    "Id": "if-logic",
+    "Title": "Условная логика (краткое введение)",
+    "Description": "if/else и тернарный оператор",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        int number = 15;\n        \n        if (number > 10)\n        {\n            Console.WriteLine(\"Число больше 10\");\n        }\n        \n        string result = (number % 2 == 0) ? \"четное\" : \"нечетное\";\n        Console.WriteLine($\"Число {number} {result}\");\n        \n        if (number > 0)\n        {\n            Console.WriteLine(\"Число положительное\");\n        }\n        else if (number < 0)\n        {\n            Console.WriteLine(\"Число отрицательное\");\n        }\n        else\n        {\n            Console.WriteLine(\"Число равно нулю\");\n        }\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Conditions",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Число больше 10\nЧисло 15 нечетное\nЧисло положительное\n",
+    "Tags": ["if", "else", "ternary"]
+  },
+  {
+    "Id": "arrays-intro",
+    "Title": "Работа с массивами (краткое введение)",
+    "Description": "Создание, доступ, изменение",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        int[] numbers = {1, 2, 3, 4, 5};\n        string[] names = {\"Анна\", \"Борис\", \"Вера\"};\n        \n        Console.WriteLine($\"Первое число: {numbers[0]}\");\n        Console.WriteLine($\"Последнее число: {numbers[numbers.Length - 1]}\");\n        \n        Console.WriteLine($\"Первое имя: {names[0]}\");\n        Console.WriteLine($\"Количество имен: {names.Length}\");\n        \n        names[1] = \"Василий\";\n        Console.WriteLine($\"Измененное второе имя: {names[1]}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Arrays",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Первое число: 1\nПоследнее число: 5\nПервое имя: Анна\nКоличество имен: 3\nИзмененное второе имя: Василий\n",
+    "Tags": ["arrays", "indexing", "length"]
+  },
+  {
+    "Id": "calc-program",
+    "Title": "Комплексная программа-калькулятор",
+    "Description": "Подведение итогов лекции",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"=== Простой калькулятор ===\");\n        Console.WriteLine();\n        \n        Console.WriteLine(\"Введите первое число:\");\n        double firstNumber = 15.5;\n        Console.WriteLine($\"Первое число: {firstNumber}\");\n        \n        Console.WriteLine(\"Введите второе число:\");\n        double secondNumber = 4.2;\n        Console.WriteLine($\"Второе число: {secondNumber}\");\n        \n        double sum = firstNumber + secondNumber;\n        double difference = firstNumber - secondNumber;\n        double product = firstNumber * secondNumber;\n        double quotient = firstNumber / secondNumber;\n        \n        Console.WriteLine();\n        Console.WriteLine(\"=== Результаты ===\");\n        Console.WriteLine($\"{firstNumber} + {secondNumber} = {sum}\");\n        Console.WriteLine($\"{firstNumber} - {secondNumber} = {difference:F2}\");\n        Console.WriteLine($\"{firstNumber} * {secondNumber} = {product:F2}\");\n        Console.WriteLine($\"{firstNumber} / {secondNumber} = {quotient:F2}\");\n        \n        Console.WriteLine();\n        Console.WriteLine(\"=== Дополнительно ===\");\n        Console.WriteLine($\"Среднее арифметическое: {(firstNumber + secondNumber) / 2:F2}\");\n        Console.WriteLine($\"Максимум: {Math.Max(firstNumber, secondNumber)}\");\n        Console.WriteLine($\"Минимум: {Math.Min(firstNumber, secondNumber)}\");\n        \n        Console.WriteLine();\n        Console.WriteLine(\"Нажмите любую клавишу для завершения...\");\n        Console.ReadKey();\n    }\n}",
+    "Category": "Project",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "=== Простой калькулятор ===\n\nВведите первое число:\nПервое число: 15.5\nВведите второе число:\nВторое число: 4.2\n\n=== Результаты ===\n15.5 + 4.2 = 19.7\n15.5 - 4.2 = 11.30\n15.5 * 4.2 = 65.10\n15.5 / 4.2 = 3.69\n\n=== Дополнительно ===\nСреднее арифметическое: 9.85\nМаксимум: 15.5\nМинимум: 4.2\n\nНажмите любую клавишу для завершения...\n",
+    "Tags": ["project", "calculator", "summary"]
+  }
+]
