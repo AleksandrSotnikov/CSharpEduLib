@@ -6,7 +6,76 @@
     "Code": "using System;\n\nnamespace HelloWorld\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Привет, мир!\");\n            Console.ReadKey();\n        }\n    }\n}",
     "Category": "Basics",
     "Difficulty": "Beginner",
-    "ExpectedOutput": "Привет, мир!",
+    "ExpectedOutput": "Привет, мир!\n",
     "Tags": ["hello-world", "console", "basics"]
-  }
-]
+  },
+  {
+    "Id": "variables-output",
+    "Title": "Переменные и вывод",
+    "Description": "Использование переменных для хранения и вывода данных",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        string name = \"Александр\";\n        int age = 25;\n        \n        Console.WriteLine(\"Меня зовут \" + name);\n        Console.WriteLine(\"Мне \" + age + \" лет\");\n        Console.ReadKey();\n    }\n}",
+    "Category": "Variables",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Меня зовут Александр\nМне 25 лет\n",
+    "Tags": ["variables", "string", "int", "concatenation"]
+  },
+  {
+    "Id": "arithmetic-operations",
+    "Title": "Арифметические операции",
+    "Description": "Основные математические операции с числами",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        int a = 10;\n        int b = 5;\n        \n        Console.WriteLine($\"{a} + {b} = {a + b}\");\n        Console.WriteLine($\"{a} - {b} = {a - b}\");\n        Console.WriteLine($\"{a} * {b} = {a * b}\");\n        Console.WriteLine($\"{a} / {b} = {a / b}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Math",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2\n",
+    "Tags": ["arithmetic", "math", "operations"]
+  },
+  {
+    "Id": "string-interpolation",
+    "Title": "Интерполяция строк",
+    "Description": "Современный способ форматирования строк в C#",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        string firstName = \"Иван\";\n        string lastName = \"Петров\";\n        int currentYear = 2025;\n        int birthYear = 1995;\n        int age = currentYear - birthYear;\n        \n        Console.WriteLine($\"Привет, {firstName} {lastName}!\");\n        Console.WriteLine($\"В {currentYear} году тебе {age} лет\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Strings",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Привет, Иван Петров!\nВ 2025 году тебе 30 лет\n",
+    "Tags": ["strings", "interpolation", "formatting"]
+  },
+  {
+    "Id": "multiple-output",
+    "Title": "Множественные выводы",
+    "Description": "Различные способы вывода текста в консоль",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"Это первая строка\");\n        Console.WriteLine(\"Это вторая строка\");\n        Console.WriteLine(\"Это третья строка\");\n        \n        Console.Write(\"Этот текст \");\n        Console.Write(\"выводится \");\n        Console.Write(\"в одной строке\");\n        \n        Console.WriteLine(); // Переход на новую строку\n        Console.WriteLine(\"А это уже на новой строке\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Console",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Это первая строка\nЭто вторая строка\nЭто третья строка\nЭтот текст выводится в одной строке\nА это уже на новой строке\n",
+    "Tags": ["console", "output", "writeline", "write"]
+  },
+  {
+    "Id": "comments",
+    "Title": "Комментарии в коде",
+    "Description": "Однострочные, многострочные и XML-комментарии",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        // Это однострочный комментарий\n        Console.WriteLine(\"Привет!\"); // Комментарий в конце строки\n        \n        /* \n         * Это многострочный комментарий\n         * Он может занимать несколько строк\n         * Очень удобно для длинных объяснений\n         */\n        \n        Console.WriteLine(\"Программа завершена\");\n        Console.ReadKey();\n    }\n}",
+    "Category": "Comments",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Привет!\nПрограмма завершена\n",
+    "Tags": ["comments", "xml-doc", "basics"]
+  },
+  {
+    "Id": "numeric-types",
+    "Title": "Работа с числами разных типов",
+    "Description": "int, double, float, decimal",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        int целоеЧисло = 42;\n        double дробноеЧисло = 3.14159;\n        float числоСПлавающейТочкой = 2.5f;\n        decimal точноеЧисло = 123.456m;\n        \n        Console.WriteLine($\"Целое: {целоеЧисло}\");\n        Console.WriteLine($\"Дробное: {дробноеЧисло}\");\n        Console.WriteLine($\"Float: {числоСПлавающейТочкой}\");\n        Console.WriteLine($\"Decimal: {точноеЧисло}\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Numbers",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Целое: 42\nДробное: 3.14159\nFloat: 2.5\nDecimal: 123.456\n",
+    "Tags": ["int", "double", "float", "decimal"]
+  },
+  {
+    "Id": "escape-sequences",
+    "Title": "Escape-последовательности",
+    "Description": "Кавычки, слеши, переносы и табуляция",
+    "Code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"Строка с \\\"кавычками\\\"\");\n        Console.WriteLine(\"Строка с \\\\обратным слешем\\\\\");\n        Console.WriteLine(\"Строка\\nс переносом строки\");\n        Console.WriteLine(\"Строка\\tс табуляцией\");\n        \n        // Вербальные строки (verbatim strings)\n        Console.WriteLine(@\"C:\\Users\\Александр\\Documents\");\n        Console.WriteLine(@\"Многострочная\nстрока без\nescape-символов\");\n        \n        Console.ReadKey();\n    }\n}",
+    "Category": "Strings",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Строка с \"кавычками\"\nСтрока с \\обратным слешем\\\nСтрока\nс переносом строки\nСтрока\tс табуляцией\nC:\\Users\\Александр\\Documents\nМногострочная\nстрока без\nescape-символов\n",
+    "Tags": ["strings", "escape", "verbatim"]
+  }],
