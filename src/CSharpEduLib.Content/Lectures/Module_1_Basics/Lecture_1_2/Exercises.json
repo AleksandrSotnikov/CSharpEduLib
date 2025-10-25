@@ -1,7 +1,88 @@
 [
-  {"Id":"m1l2-ex1","Title":"Сумма int","Description":"Считайте два int и выведите сумму","Requirements":"Используйте int.Parse","Example":"2 and 3 -> 5","MaxScore":10,"Difficulty":1,"Order":1},
-  {"Id":"m1l2-ex2","Title":"Площадь прямоугольника","Description":"Считайте ширину и высоту (int) и выведите площадь","Requirements":"a*b","Example":"3 and 4 -> 12","MaxScore":10,"Difficulty":1,"Order":2},
-  {"Id":"m1l2-ex3","Title":"TryParse","Description":"Считайте строку, выведите число или 'error'","Requirements":"TryParse","Example":"x -> error","MaxScore":10,"Difficulty":2,"Order":3},
-  {"Id":"m1l2-ex4","Title":"Среднее double","Description":"Считайте два double и выведите среднее","Requirements":"(a+b)/2","Example":"1.0 and 3.0 -> 2.0","MaxScore":10,"Difficulty":2,"Order":4},
-  {"Id":"m1l2-ex5","Title":"Форматирование","Description":"Выведите 'Ответ: N' для введенного N","Requirements":"интерполяция","Example":"42 -> Ответ: 42","MaxScore":10,"Difficulty":1,"Order":5}
+  {
+    "Id": "m1l2-ex1",
+    "Title": "Сумма двух чисел",
+    "Description": "Считайте два целых числа (int) с клавиатуры. Каждое число с новой строки. Выведите их сумму.",
+    "Requirements": "Используйте int.Parse. Вывод только суммы, никакого дополнительного текста.",
+    "InputFormat": "Первая строка: первое число\nВторая строка: второе число",
+    "OutputFormat": "Одно число - сумма",
+    "TestCases": [
+      {"Input": "2\n3", "ExpectedOutput": "5"},
+      {"Input": "10\n-5", "ExpectedOutput": "5"},
+      {"Input": "0\n0", "ExpectedOutput": "0"},
+      {"Input": "-7\n-3", "ExpectedOutput": "-10"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 1
+  },
+  {
+    "Id": "m1l2-ex2",
+    "Title": "Площадь прямоугольника",
+    "Description": "Считайте ширину и высоту прямоугольника (целые числа). Каждое число с новой строки. Выведите площадь.",
+    "Requirements": "Площадь = ширина * высота. Только число в выводе.",
+    "InputFormat": "Первая строка: ширина\nВторая строка: высота",
+    "OutputFormat": "Одно число - площадь",
+    "TestCases": [
+      {"Input": "3\n4", "ExpectedOutput": "12"},
+      {"Input": "5\n7", "ExpectedOutput": "35"},
+      {"Input": "1\n1", "ExpectedOutput": "1"},
+      {"Input": "10\n2", "ExpectedOutput": "20"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 2
+  },
+  {
+    "Id": "m1l2-ex3",
+    "Title": "Проверка числа TryParse",
+    "Description": "Считайте строку. Если это корректное целое число, выведите это число. Иначе выведите \"error\".",
+    "Requirements": "Обязательно использовать int.TryParse. Точно слово \"error\" без кавычек.",
+    "InputFormat": "Одна строка - любой текст",
+    "OutputFormat": "Либо число, либо \"error\"",
+    "TestCases": [
+      {"Input": "42", "ExpectedOutput": "42"},
+      {"Input": "-10", "ExpectedOutput": "-10"},
+      {"Input": "abc", "ExpectedOutput": "error"},
+      {"Input": "12.5", "ExpectedOutput": "error"},
+      {"Input": "", "ExpectedOutput": "error"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 3
+  },
+  {
+    "Id": "m1l2-ex4",
+    "Title": "Среднее арифметическое",
+    "Description": "Считайте два вещественных числа (double) с клавиатуры. Каждое число с новой строки. Выведите среднее арифметическое с двумя знаками после запятой.",
+    "Requirements": "Среднее = (a + b) / 2. Округление до 2 знаков после запятой.",
+    "InputFormat": "Первая строка: первое число (double)\nВторая строка: второе число (double)",
+    "OutputFormat": "Одно число - среднее с двумя знаками после запятой",
+    "TestCases": [
+      {"Input": "1.0\n3.0", "ExpectedOutput": "2.00"},
+      {"Input": "5.5\n8.3", "ExpectedOutput": "6.90"},
+      {"Input": "0\n10", "ExpectedOutput": "5.00"},
+      {"Input": "-2.5\n2.5", "ExpectedOutput": "0.00"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 4
+  },
+  {
+    "Id": "m1l2-ex5",
+    "Title": "Форматирование с интерполяцией",
+    "Description": "Считайте целое число N с клавиатуры. Выведите текст в формате \"Answer: N\" (где N - это введенное число).",
+    "Requirements": "Использовать интерполяцию строк ($\"\"). Точный формат \"Answer: N\".",
+    "InputFormat": "Одно целое число",
+    "OutputFormat": "\"Ответ: N\" где N - введенное число",
+    "TestCases": [
+      {"Input": "42", "ExpectedOutput": "Answer: 42"},
+      {"Input": "0", "ExpectedOutput": "Answer: 0"},
+      {"Input": "-5", "ExpectedOutput": "Answer: -5"},
+      {"Input": "100", "ExpectedOutput": "Answer: 100"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 5
+  }
 ]
