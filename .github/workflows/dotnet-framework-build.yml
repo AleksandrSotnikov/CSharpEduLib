@@ -1,0 +1,29 @@
+name: .NET Framework build
+
+on:
+  push:
+    branches: [ feature/enhanced-utilities-and-exercises ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore CSharpEduLib.sln
+
+      - name: Build solution (Release)
+        run: msbuild CSharpEduLib.sln /t:Rebuild /p:Configuration=Release
+
+      # Примечание: Запуск NUnit тестов возможен после добавления тестового раннера и/или переноса тестов в отдельный исполняемый контекст.
+      # В текущей версии тестовые файлы инклюдятся из контента, поэтому шаг запуска тестов будет добавлен после подтверждения.
