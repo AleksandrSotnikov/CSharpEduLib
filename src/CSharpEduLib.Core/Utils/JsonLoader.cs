@@ -22,14 +22,6 @@ namespace CSharpEduLib.Core.Utils
             StringEscapeHandling = StringEscapeHandling.EscapeNonAscii
         };
 
-        /// <summary>
-        /// Загрузить объект из JSON файла
-        /// </summary>
-        /// <typeparam name="T">Тип объекта</typeparam>
-        /// <param name="filePath">Путь к файлу</param>
-        /// <returns>Объект с данными из JSON</returns>
-        /// <exception cref="FileNotFoundException">Когда файл не найден</exception>
-        /// <exception cref="InvalidOperationException">При ошибке чтения или парсинга JSON</exception>
         public T LoadFromFile<T>(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
@@ -51,14 +43,16 @@ namespace CSharpEduLib.Core.Utils
                 
                 return JsonConvert.DeserializeObject<T>(jsonContent, DefaultSettings);
             }
-            catch (FileNotFoundException)
+            catch (JsonReaderException ex)
             {
-                throw; // Повторно выбрасываем FileNotFoundException
+                throw new InvalidOperationException(
+                    $"Ошибка парсинга JSON в файле '{filePath}' на строке {ex.LineNumber}, позиции {ex.LinePosition}: {ex.Message}", 
+                    ex);
             }
             catch (JsonException ex)
             {
                 throw new InvalidOperationException(
-                    $"Ошибка парсинга JSON в файле '{filePath}' на строке {ex.LineNumber}, позиции {ex.LinePosition}: {ex.Message}", 
+                    $"Ошибка парсинга JSON в файле '{filePath}': {ex.Message}",
                     ex);
             }
             catch (Exception ex)
@@ -69,14 +63,6 @@ namespace CSharpEduLib.Core.Utils
             }
         }
         
-        /// <summary>
-        /// Загрузить объект из JSON строки
-        /// </summary>
-        /// <typeparam name="T">Тип объекта</typeparam>
-        /// <param name="jsonString">JSON строка</param>
-        /// <returns>Объект с данными из JSON</returns>
-        /// <exception cref="ArgumentException">Когда JSON строка пуста</exception>
-        /// <exception cref="InvalidOperationException">При ошибке парсинга JSON</exception>
         public T LoadFromString<T>(string jsonString)
         {
             if (string.IsNullOrWhiteSpace(jsonString))
@@ -86,10 +72,16 @@ namespace CSharpEduLib.Core.Utils
             {
                 return JsonConvert.DeserializeObject<T>(jsonString, DefaultSettings);
             }
+            catch (JsonReaderException ex)
+            {
+                throw new InvalidOperationException(
+                    $"Ошибка парсинга JSON: строка {ex.LineNumber}, позиция {ex.LinePosition}: {ex.Message}", 
+                    ex);
+            }
             catch (JsonException ex)
             {
                 throw new InvalidOperationException(
-                    $"Ошибка парсинга JSON на строке {ex.LineNumber}, позиции {ex.LinePosition}: {ex.Message}", 
+                    $"Ошибка парсинга JSON: {ex.Message}", 
                     ex);
             }
             catch (Exception ex)
@@ -98,14 +90,6 @@ namespace CSharpEduLib.Core.Utils
             }
         }
         
-        /// <summary>
-        /// Сохранить объект в JSON файл
-        /// </summary>
-        /// <typeparam name="T">Тип объекта</typeparam>
-        /// <param name="obj">Объект для сохранения</param>
-        /// <param name="filePath">Путь к файлу</param>
-        /// <exception cref="ArgumentException">Когда путь к файлу пуст</exception>
-        /// <exception cref="InvalidOperationException">При ошибке сохранения</exception>
         public void SaveToFile<T>(T obj, string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
@@ -115,7 +99,6 @@ namespace CSharpEduLib.Core.Utils
             {
                 string jsonContent = JsonConvert.SerializeObject(obj, DefaultSettings);
                 
-                // Создаем директорию, если она не существует
                 string directory = Path.GetDirectoryName(filePath);
                 if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 {
@@ -150,13 +133,6 @@ namespace CSharpEduLib.Core.Utils
             }
         }
         
-        /// <summary>
-        /// Преобразовать объект в JSON строку
-        /// </summary>
-        /// <typeparam name="T">Тип объекта</typeparam>
-        /// <param name="obj">Объект для преобразования</param>
-        /// <returns>JSON строка</returns>
-        /// <exception cref="InvalidOperationException">При ошибке сериализации</exception>
         public string ConvertToString<T>(T obj)
         {
             try
@@ -177,11 +153,6 @@ namespace CSharpEduLib.Core.Utils
             }
         }
         
-        /// <summary>
-        /// Проверить, является ли строка валидным JSON
-        /// </summary>
-        /// <param name="jsonString">Строка для проверки</param>
-        /// <returns>True, если строка является валидным JSON</returns>
         public bool IsValidJson(string jsonString)
         {
             if (string.IsNullOrWhiteSpace(jsonString))
@@ -202,11 +173,6 @@ namespace CSharpEduLib.Core.Utils
             }
         }
         
-        /// <summary>
-        /// Проверить, является ли файл валидным JSON
-        /// </summary>
-        /// <param name="filePath">Путь к файлу</param>
-        /// <returns>True, если файл содержит валидный JSON</returns>
         public bool IsValidJsonFile(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
@@ -223,13 +189,6 @@ namespace CSharpEduLib.Core.Utils
             }
         }
         
-        /// <summary>
-        /// Загрузить все JSON файлы из директории
-        /// </summary>
-        /// <typeparam name="T">Тип объектов</typeparam>
-        /// <param name="directoryPath">Путь к директории</param>
-        /// <param name="recursive">Рекурсивный поиск</param>
-        /// <returns>Список объектов</returns>
         public List<T> LoadAllFromDirectory<T>(string directoryPath, bool recursive = true)
         {
             var results = new List<T>();
@@ -259,7 +218,6 @@ namespace CSharpEduLib.Core.Utils
                     }
                     catch (Exception ex)
                     {
-                        // Логируем ошибку и продолжаем
                         Console.WriteLine($"[Ошибка JsonLoader] Не удалось загрузить {file}: {ex.Message}");
                     }
                 }
