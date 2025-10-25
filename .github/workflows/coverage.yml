@@ -1,0 +1,37 @@
+name: Coverage
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-coverage:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore NuGet packages (legacy)
+        run: |
+          nuget restore CSharpEduLib.sln
+      - name: Build
+        run: |
+          msbuild CSharpEduLib.sln /p:Configuration=Release
+      - name: Test with coverage (coverlet.console)
+        run: |
+          dotnet tool install --global coverlet.console --version 3.2.0
+          setx PATH "%PATH%;%USERPROFILE%\.dotnet\tools"
+          coverlet .\tests\CSharpEduLib.Core.Tests\bin\Release\CSharpEduLib.Core.Tests.dll --target "vstest.console.exe" --targetargs ".\tests\CSharpEduLib.Core.Tests\bin\Release\CSharpEduLib.Core.Tests.dll" --format "lcov" --output "coverage_core.info"
+          coverlet .\tests\CSharpEduLib.Exercises.Tests\bin\Release\CSharpEduLib.Exercises.Tests.dll --target "vstest.console.exe" --targetargs ".\tests\CSharpEduLib.Exercises.Tests\bin\Release\CSharpEduLib.Exercises.Tests.dll" --format "lcov" --output "coverage_exercises.info"
+      - name: Merge coverage
+        run: |
+          echo "TN:" > coverage.info
+          type coverage_core.info >> coverage.info
+          type coverage_exercises.info >> coverage.info
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov-coverage
+          path: coverage.info
