@@ -1,0 +1,12 @@
+[
+  {"Id":"m1l1-ex3","Title":"Приветствие по имени","Description":"Считывайте имя и выводите 'Hi, <имя>!'","Requirements":"Используйте Console.ReadLine и Console.WriteLine","Example":"Input: Alex\nOutput: Hi, Alex!","MaxScore":10,"Difficulty":1,"Order":3},
+  {"Id":"m1l1-ex4","Title":"Квадрат числа","Description":"Считывайте целое n и выводите n*n","Requirements":"Используйте int.Parse","Example":"Input: 7\nOutput: 49","MaxScore":10,"Difficulty":1,"Order":4},
+  {"Id":"m1l1-ex5","Title":"Сумма двух чисел","Description":"Считывайте два целых и выводите их сумму","Requirements":"Числа вводятся построчно","Example":"Input: 2  \n3\nOutput: 5","MaxScore":10,"Difficulty":1,"Order":5},
+  {"Id":"m1l1-ex6","Title":"Конкатенация","Description":"Считайте две строки и выведите их через пробел","Requirements":"Не используйте форматирование, только +","Example":"Input: Hello  \nC#\nOutput: Hello C#","MaxScore":10,"Difficulty":1,"Order":6},
+  {"Id":"m1l1-ex7","Title":"Остаток","Description":"Считайте два целых a и b и выведите a%b","Requirements":"Используйте оператор %","Example":"Input: 10  \n3\nOutput: 1","MaxScore":10,"Difficulty":1,"Order":7},
+  {"Id":"m1l1-ex8","Title":"Среднее","Description":"Считайте два вещественных и выведите среднее","Requirements":"Используйте (a+b)/2","Example":"Input: 1.0  \n3.0\nOutput: 2","MaxScore":10,"Difficulty":2,"Order":8},
+  {"Id":"m1l1-ex9","Title":"Форматированный вывод","Description":"Выведите число 42 в формате 'Ответ: 42'","Requirements":"String.Format или интерполяция","Example":"Output: Ответ: 42","MaxScore":10,"Difficulty":1,"Order":9},
+  {"Id":"m1l1-ex10","Title":"Экранирование","Description":"Выведите строку в кавычках: \"C#\"","Requirements":"Экранируйте кавычки","Example":"Output: \"C#\"","MaxScore":10,"Difficulty":2,"Order":10},
+  {"Id":"m1l1-ex11","Title":"Инкремент","Description":"Считайте n и выведите n+1","Requirements":"Используйте +","Example":"Input: 99\nOutput: 100","MaxScore":10,"Difficulty":1,"Order":11},
+  {"Id":"m1l1-ex12","Title":"Температура","Description":"Считайте цельсии и выведите фаренгейты","Requirements":"F = C*9/5+32","Example":"Input: 0\nOutput: 32","MaxScore":10,"Difficulty":2,"Order":12}
+]
