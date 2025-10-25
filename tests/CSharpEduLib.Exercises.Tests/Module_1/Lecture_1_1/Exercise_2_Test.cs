@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using CSharpEduLib.Exercises.Tests.Helpers;
 
 namespace CSharpEduLib.Exercises.Tests.Module_1.Lecture_1_1
 {
@@ -8,8 +9,10 @@ namespace CSharpEduLib.Exercises.Tests.Module_1.Lecture_1_1
         [Test]
         public void Should_Print_Sum_2_and_3()
         {
-            // TODO: реализовать тест проверки вывода суммы 5
-            Assert.Pass("Заглушка теста: реализовать запуск и проверку вывода");
+            string studentCode = @"using System; class Program { static void Main(){ Console.WriteLine(2+3); } }";
+            var (success, stdout, stderr) = Runner.Run(studentCode);
+            Assert.IsTrue(success, $"Compilation/Run failed: {stderr}");
+            StringAssert.Contains("5", stdout);
         }
     }
 }
