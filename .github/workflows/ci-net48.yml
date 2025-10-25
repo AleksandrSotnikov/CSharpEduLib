@@ -27,21 +27,51 @@ jobs:
       - name: Run tests with coverage (Coverlet + vstest.console)
         shell: powershell
         run: |
-          dotnet tool install --global coverlet.console || echo "coverlet already installed"
+          try {
+            dotnet tool install --global coverlet.console
+          } catch {
+            Write-Host "coverlet already installed"
+          }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
-          # Поиск тестовых сборок
-          $tests = Get-ChildItem -Recurse -Filter *Tests.dll | Where-Object { $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          $coverlet = Join-Path $env:USERPROFILE ".dotnet\tools\coverlet"
+          if (-not (Test-Path $coverlet)) { $coverlet = "coverlet" }
+          
+          $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
+          if (-not (Test-Path $testResults)) { New-Item -ItemType Directory -Force -Path $testResults | Out-Null }
+          
+          # Поиск тестовых сборок (.NET Framework 4.8)
+          $tests = Get-ChildItem -Recurse -Filter CSharpEduLib.Tests.dll | Where-Object { $_.FullName -match "\\bin\\Release\\" -and $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          if (-not $tests) { Write-Host "No test assemblies found"; exit 1 }
+          
           foreach ($t in $tests) {
-            coverlet $t.FullName --target "vstest.console.exe" --targetargs "$($t.FullName) /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$(Resolve-Path ./TestResults)/coverage_$($t.BaseName).xml"
+            $outFile = Join-Path $testResults ("coverage_" + $t.BaseName + ".xml")
+            Write-Host "Running coverage for: $($t.FullName)"
+            & $coverlet "$($t.FullName)" --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$outFile"
           }
 
       - name: ReportGenerator
         if: always()
         shell: powershell
         run: |
-          dotnet tool install --global dotnet-reportgenerator-globaltool || echo "reportgenerator already installed"
+          try {
+            dotnet tool install --global dotnet-reportgenerator-globaltool
+          } catch {
+            Write-Host "reportgenerator already installed"
+          }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
-          reportgenerator -reports:"TestResults/*.xml" -targetdir:"CoverageReport" -reporttypes:Html
+          $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
+          if (-not (Test-Path $testResults)) { 
+            Write-Host "No TestResults directory found, skipping report generation"
+            exit 0 
+          }
+          
+          $coverageFiles = Get-ChildItem -Path $testResults -Filter "*.xml" | Measure-Object
+          if ($coverageFiles.Count -eq 0) {
+            Write-Host "No coverage files found in TestResults, skipping report generation"
+            exit 0
+          }
+          
+          reportgenerator -reports:"$testResults/*.xml" -targetdir:"CoverageReport" -reporttypes:Html
 
       - name: Upload coverage artifact
         if: always()

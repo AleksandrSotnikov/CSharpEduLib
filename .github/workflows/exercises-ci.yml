@@ -1,0 +1,83 @@
+name: Exercises Tests
+
+on:
+  push:
+    branches: [ main, 'feature/**', 'exercises/**' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  test-exercises:
+    runs-on: windows-latest
+    continue-on-error: true # Don't fail the workflow if exercises aren't implemented yet
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+        
+      - name: Setup VSTest
+        uses: darenm/Setup-VSTest@v1
+        
+      - name: Restore NuGet packages
+        run: nuget restore CSharpEduLib.sln
+        
+      - name: Build
+        run: msbuild CSharpEduLib.sln /p:Configuration=Release /p:Platform="Any CPU" /p:RestorePackages=true
+        
+      - name: Run Exercise Tests
+        shell: powershell
+        run: |
+          # Find test assemblies in Release build output
+          $tests = Get-ChildItem -Recurse -Filter *.Tests.dll | Where-Object { $_.FullName -match "\\bin\\Release\\" -and $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          
+          if (-not $tests) {
+            Write-Host "No test assemblies found"
+            exit 1
+          }
+          
+          $totalPassed = 0
+          $totalFailed = 0
+          $exerciseResults = @()
+          
+          foreach ($t in $tests) {
+            Write-Host "Running exercise tests: $($t.FullName)"
+            
+            # Run only exercise tests (tests containing "Exercise" in the name)
+            $result = vstest.console.exe "$($t.FullName)" /Framework:.NETFramework,Version=v4.8 /TestCaseFilter:"FullyQualifiedName~Exercise" /Logger:console;verbosity=quiet
+            
+            # Parse results (simplified - VSTest outputs results to console)
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host "✅ All exercise tests passed" -ForegroundColor Green
+            } else {
+              Write-Host "⚠️ Some exercise tests failed (expected until implemented)" -ForegroundColor Yellow
+            }
+          }
+          
+          Write-Host ""
+          Write-Host "🎯 Exercise Test Summary:"
+          Write-Host "This workflow tracks progress on educational exercises."
+          Write-Host "Failing tests indicate exercises that need implementation."
+          Write-Host "This is expected behavior for a learning library."
+          
+          # Always exit 0 to not block CI - this is informational only
+          exit 0
+          
+      - name: Exercise Status Summary
+        if: always()
+        run: |
+          echo "## 🎯 Exercise Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This workflow tests educational exercises and is expected to have failures" >> $GITHUB_STEP_SUMMARY
+          echo "until student solutions are implemented. This does not indicate a problem" >> $GITHUB_STEP_SUMMARY
+          echo "with the core library functionality." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Purpose" >> $GITHUB_STEP_SUMMARY
+          echo "- 📚 Track implementation progress of educational content" >> $GITHUB_STEP_SUMMARY
+          echo "- 🧪 Validate exercise test infrastructure" >> $GITHUB_STEP_SUMMARY
+          echo "- 🎓 Provide feedback for learning path completion" >> $GITHUB_STEP_SUMMARY

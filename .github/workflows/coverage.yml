@@ -10,27 +10,80 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+        
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+          
       - name: Restore NuGet packages (legacy)
         run: |
           nuget restore CSharpEduLib.sln
+          
       - name: Build
         run: |
           msbuild CSharpEduLib.sln /p:Configuration=Release
+          
       - name: Test with coverage (coverlet.console)
+        shell: powershell
         run: |
-          dotnet tool install --global coverlet.console --version 3.2.0
-          setx PATH "%PATH%;%USERPROFILE%\.dotnet\tools"
-          coverlet .\tests\CSharpEduLib.Core.Tests\bin\Release\CSharpEduLib.Core.Tests.dll --target "vstest.console.exe" --targetargs ".\tests\CSharpEduLib.Core.Tests\bin\Release\CSharpEduLib.Core.Tests.dll" --format "lcov" --output "coverage_core.info"
-          coverlet .\tests\CSharpEduLib.Exercises.Tests\bin\Release\CSharpEduLib.Exercises.Tests.dll --target "vstest.console.exe" --targetargs ".\tests\CSharpEduLib.Exercises.Tests\bin\Release\CSharpEduLib.Exercises.Tests.dll" --format "lcov" --output "coverage_exercises.info"
-      - name: Merge coverage
-        run: |
-          echo "TN:" > coverage.info
-          type coverage_core.info >> coverage.info
-          type coverage_exercises.info >> coverage.info
+          try {
+            dotnet tool install --global coverlet.console --version 3.2.0
+          } catch {
+            Write-Host "coverlet already installed"
+          }
+          $env:Path += ";$env:USERPROFILE\.dotnet\tools"
+          
+          # Create TestResults directory
+          $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
+          if (-not (Test-Path $testResults)) { New-Item -ItemType Directory -Force -Path $testResults | Out-Null }
+          
+          # Find test assemblies
+          $tests = Get-ChildItem -Recurse -Filter *.Tests.dll | Where-Object { $_.FullName -match "\\bin\\Release\\" -and $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          
+          if (-not $tests) {
+            Write-Host "No test assemblies found"
+            exit 1
+          }
+          
+          $coverageFiles = @()
+          foreach ($t in $tests) {
+            $baseName = $t.BaseName -replace '\.Tests$', ''
+            $outFile = Join-Path $testResults ("coverage_" + $baseName + ".info")
+            Write-Host "Running coverage for: $($t.FullName)"
+            
+            # Correct coverlet syntax: coverlet <TEST_ASSEMBLY> --target <TEST_RUNNER> --targetargs <ARGS>
+            coverlet "$($t.FullName)" --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8 /TestCaseFilter:\"FullyQualifiedName!~Exercise\"" --format "lcov" --output "$outFile"
+            
+            if (Test-Path $outFile) {
+              $coverageFiles += $outFile
+            } else {
+              Write-Host "Warning: Coverage file not generated for $($t.Name)"
+            }
+          }
+          
+          # Merge coverage files
+          $mergedFile = Join-Path (Get-Location) "coverage.info"
+          "TN:" | Out-File -FilePath $mergedFile -Encoding ASCII
+          
+          if ($coverageFiles.Count -eq 0) {
+            Write-Host "No coverage files generated"
+            "# No coverage data available" | Out-File -FilePath $mergedFile -Append -Encoding ASCII
+          } else {
+            foreach ($file in $coverageFiles) {
+              if (Test-Path $file) {
+                Get-Content $file | Out-File -FilePath $mergedFile -Append -Encoding ASCII
+              }
+            }
+          }
+          
       - name: Upload coverage artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lcov-coverage
