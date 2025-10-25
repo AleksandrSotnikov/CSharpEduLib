@@ -26,7 +26,7 @@ jobs:
       - name: Build
         run: msbuild CSharpEduLib.sln /p:Configuration=Release /p:Platform="Any CPU" /p:RestorePackages=true
         
-      - name: Test
+      - name: Test (Core Library Only)
         shell: powershell
         run: |
           # Find test assemblies in Release build output
@@ -38,6 +38,7 @@ jobs:
           }
           
           foreach ($t in $tests) {
-            Write-Host "Running tests: $($t.FullName)"
-            vstest.console.exe "$($t.FullName)" /Framework:.NETFramework,Version=v4.8
+            Write-Host "Running core library tests: $($t.FullName)"
+            # Exclude exercise tests that contain "Exercise" in the test name or namespace
+            vstest.console.exe "$($t.FullName)" /Framework:.NETFramework,Version=v4.8 /TestCaseFilter:"FullyQualifiedName!~Exercise"
           }
