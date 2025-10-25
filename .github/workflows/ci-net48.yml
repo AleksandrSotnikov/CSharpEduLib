@@ -33,10 +33,14 @@ jobs:
             Write-Host "coverlet already installed"
           }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
-          # Поиск тестовых сборок
-          $tests = Get-ChildItem -Recurse -Filter *Tests.dll | Where-Object { $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
+          if (-not (Test-Path $testResults)) { New-Item -ItemType Directory -Force -Path $testResults | Out-Null }
+          # Поиск тестовых сборок (.NET Framework 4.8)
+          $tests = Get-ChildItem -Recurse -Filter CSharpEduLib.Tests.dll | Where-Object { $_.FullName -match "\\bin\\Release\\" -and $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
+          if (-not $tests) { Write-Host "No test assemblies found"; exit 1 }
           foreach ($t in $tests) {
-            coverlet $t.FullName --target "vstest.console.exe" --targetargs "$($t.FullName) /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$(Resolve-Path ./TestResults)/coverage_$($t.BaseName).xml"
+            $outFile = Join-Path $testResults ("coverage_" + $t.BaseName + ".xml")
+            coverlet $t.FullName --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$outFile"
           }
 
       - name: ReportGenerator
@@ -49,7 +53,9 @@ jobs:
             Write-Host "reportgenerator already installed"
           }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
-          reportgenerator -reports:"TestResults/*.xml" -targetdir:"CoverageReport" -reporttypes:Html
+          $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
+          if (-not (Test-Path $testResults)) { Write-Host "No TestResults directory"; exit 0 }
+          reportgenerator -reports:"$testResults/*.xml" -targetdir:"CoverageReport" -reporttypes:Html
 
       - name: Upload coverage artifact
         if: always()
