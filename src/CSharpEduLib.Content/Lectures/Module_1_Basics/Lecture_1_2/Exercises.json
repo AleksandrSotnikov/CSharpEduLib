@@ -1,0 +1,7 @@
+[
+  {"Id":"m1l2-ex1","Title":"Сумма int","Description":"Считайте два int и выведите сумму","Requirements":"Используйте int.Parse","Example":"2 and 3 -> 5","MaxScore":10,"Difficulty":1,"Order":1},
+  {"Id":"m1l2-ex2","Title":"Площадь прямоугольника","Description":"Считайте ширину и высоту (int) и выведите площадь","Requirements":"a*b","Example":"3 and 4 -> 12","MaxScore":10,"Difficulty":1,"Order":2},
+  {"Id":"m1l2-ex3","Title":"TryParse","Description":"Считайте строку, выведите число или 'error'","Requirements":"TryParse","Example":"x -> error","MaxScore":10,"Difficulty":2,"Order":3},
+  {"Id":"m1l2-ex4","Title":"Среднее double","Description":"Считайте два double и выведите среднее","Requirements":"(a+b)/2","Example":"1.0 and 3.0 -> 2.0","MaxScore":10,"Difficulty":2,"Order":4},
+  {"Id":"m1l2-ex5","Title":"Форматирование","Description":"Выведите 'Ответ: N' для введенного N","Requirements":"интерполяция","Example":"42 -> Ответ: 42","MaxScore":10,"Difficulty":1,"Order":5}
+]
