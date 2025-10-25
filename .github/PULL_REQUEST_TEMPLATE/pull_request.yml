@@ -1,0 +1,19 @@
+name: Pull Request
+description: Предложить изменения в проекте
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Краткое описание изменений
+      placeholder: Что и зачем изменено?
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Чеклист
+      options:
+        - label: Код соответствует стилю проекта
+        - label: Добавлены/обновлены тесты
+        - label: Обновлена документация при необходимости
+        - label: Локально проходят сборка и тесты

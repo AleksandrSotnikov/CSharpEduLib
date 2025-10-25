@@ -1,0 +1,27 @@
+name: Issue
+description: Сообщить об ошибке или предложить улучшение
+labels: ["triage"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание
+      description: Кратко опишите проблему или предложение
+      placeholder: Что произошло? Что ожидается?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги воспроизведения / Детали
+      description: Шаги, скриншоты, логи
+  - type: dropdown
+    id: type
+    attributes:
+      label: Тип
+      options:
+        - bug
+        - enhancement
+        - question
+    validations:
+      required: true
