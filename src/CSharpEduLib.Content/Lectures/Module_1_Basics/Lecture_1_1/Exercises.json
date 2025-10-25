@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "m1l1-ex1",
+    "Title": "Выведите имя и фамилию",
+    "Description": "Выведите в две отдельные строки вашу фамилию и имя",
+    "Requirements": "Используйте Console.WriteLine два раза",
+    "Example": "Ivanov\nIvan",
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 1
+  },
+  {
+    "Id": "m1l1-ex2",
+    "Title": "Сумма 2 и 3",
+    "Description": "Выведите сумму чисел 2 и 3",
+    "Requirements": "Результат должен быть 5",
+    "Example": "5",
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 2
+  }
+]
