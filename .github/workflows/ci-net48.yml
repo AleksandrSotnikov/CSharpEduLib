@@ -27,7 +27,11 @@ jobs:
       - name: Run tests with coverage (Coverlet + vstest.console)
         shell: powershell
         run: |
-          dotnet tool install --global coverlet.console || echo "coverlet already installed"
+          try {
+            dotnet tool install --global coverlet.console
+          } catch {
+            Write-Host "coverlet already installed"
+          }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
           # Поиск тестовых сборок
           $tests = Get-ChildItem -Recurse -Filter *Tests.dll | Where-Object { $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
@@ -39,7 +43,11 @@ jobs:
         if: always()
         shell: powershell
         run: |
-          dotnet tool install --global dotnet-reportgenerator-globaltool || echo "reportgenerator already installed"
+          try {
+            dotnet tool install --global dotnet-reportgenerator-globaltool
+          } catch {
+            Write-Host "reportgenerator already installed"
+          }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
           reportgenerator -reports:"TestResults/*.xml" -targetdir:"CoverageReport" -reporttypes:Html
 
