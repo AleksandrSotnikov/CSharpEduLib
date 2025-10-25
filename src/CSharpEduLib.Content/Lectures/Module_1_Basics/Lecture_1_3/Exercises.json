@@ -1,0 +1,150 @@
+[
+  {
+    "Id": "m1l3-ex1",
+    "Title": "Приоритет умножения",
+    "Description": "Считайте три целых a, b, c (каждое с новой строки). Выведите значение a + b * c.",
+    "Requirements": "Только число в выводе.",
+    "InputFormat": "a\nb\nc",
+    "OutputFormat": "Одно целое число",
+    "TestCases": [
+      {"Input": "2\n3\n4", "ExpectedOutput": "14"},
+      {"Input": "1\n0\n10", "ExpectedOutput": "1"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 1
+  },
+  {
+    "Id": "m1l3-ex2",
+    "Title": "Скобки меняют порядок",
+    "Description": "Считайте три целых a, b, c. Выведите (a + b) * c.",
+    "Requirements": "Только число в выводе.",
+    "InputFormat": "a\nb\nc",
+    "OutputFormat": "Одно целое число",
+    "TestCases": [
+      {"Input": "2\n3\n4", "ExpectedOutput": "20"},
+      {"Input": "1\n0\n10", "ExpectedOutput": "10"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 2
+  },
+  {
+    "Id": "m1l3-ex3",
+    "Title": "Инкремент и порядок",
+    "Description": "Считайте одно целое n. Выведите сначала ++n, потом n++, потом текущее n (каждое с новой строки).",
+    "Requirements": "Использовать префиксный и постфиксный инкремент.",
+    "InputFormat": "n",
+    "OutputFormat": "Три строки: значения после операций",
+    "TestCases": [
+      {"Input": "5", "ExpectedOutput": "6\n6\n7"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 3
+  },
+  {
+    "Id": "m1l3-ex4",
+    "Title": "Комбинированные операторы",
+    "Description": "Считайте одно целое x. Примените: x += 5; x *= 2; x -= 4; Выведите итог.",
+    "Requirements": "Только число.",
+    "InputFormat": "x",
+    "OutputFormat": "Одно целое число",
+    "TestCases": [
+      {"Input": "10", "ExpectedOutput": "26"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 4
+  },
+  {
+    "Id": "m1l3-ex5",
+    "Title": "Побитовые флаги",
+    "Description": "Считайте целое perms. Установите биты 0 и 2 (READ=1, EXEC=4): perms |= 1; perms |= 4; Выведите perms.",
+    "Requirements": "Только число.",
+    "InputFormat": "perms",
+    "OutputFormat": "Одно целое число",
+    "TestCases": [
+      {"Input": "0", "ExpectedOutput": "5"},
+      {"Input": "2", "ExpectedOutput": "7"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 5
+  },
+  {
+    "Id": "m1l3-ex6",
+    "Title": "Проверка четности",
+    "Description": "Считайте целое n. Выведите True, если n четное, иначе False.",
+    "Requirements": "Использовать (n & 1) == 0.",
+    "InputFormat": "n",
+    "OutputFormat": "True или False",
+    "TestCases": [
+      {"Input": "4", "ExpectedOutput": "True"},
+      {"Input": "7", "ExpectedOutput": "False"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 6
+  },
+  {
+    "Id": "m1l3-ex7",
+    "Title": "Сдвиг влево",
+    "Description": "Считайте целые n и k. Выведите n << k.",
+    "Requirements": "Только число.",
+    "InputFormat": "n\nk",
+    "OutputFormat": "Одно целое число",
+    "TestCases": [
+      {"Input": "5\n1", "ExpectedOutput": "10"},
+      {"Input": "3\n3", "ExpectedOutput": "24"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 7
+  },
+  {
+    "Id": "m1l3-ex8",
+    "Title": "Сравнение double с эпсилон",
+    "Description": "Считайте два double a и b. Выведите True, если |a-b| < 1e-9, иначе False.",
+    "Requirements": "Math.Abs(a-b) < 1e-9.",
+    "InputFormat": "a\nb",
+    "OutputFormat": "True или False",
+    "TestCases": [
+      {"Input": "0.1\n0.1000000001", "ExpectedOutput": "True"},
+      {"Input": "0.1\n0.1001", "ExpectedOutput": "False"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 8
+  },
+  {
+    "Id": "m1l3-ex9",
+    "Title": "Тернарный максимум",
+    "Description": "Считайте два целых a и b. Выведите большее из них используя тернарный оператор.",
+    "Requirements": "Только число.",
+    "InputFormat": "a\nb",
+    "OutputFormat": "Одно целое число",
+    "TestCases": [
+      {"Input": "5\n7", "ExpectedOutput": "7"},
+      {"Input": "10\n-3", "ExpectedOutput": "10"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 9
+  },
+  {
+    "Id": "m1l3-ex10",
+    "Title": "Комбинация логики",
+    "Description": "Считайте булевые p и q (строки True/False). Выведите (p && !q) || (!p && q).",
+    "Requirements": "Логические операции и парсинг булевых.",
+    "InputFormat": "p\nq",
+    "OutputFormat": "True или False",
+    "TestCases": [
+      {"Input": "True\nFalse", "ExpectedOutput": "True"},
+      {"Input": "True\nTrue", "ExpectedOutput": "False"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 10
+  }
+]
