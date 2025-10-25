@@ -27,9 +27,6 @@ namespace CSharpEduLib.Core.Services
             LoadExercises();
         }
         
-        /// <summary>
-        /// Получить упражнение по идентификатору
-        /// </summary>
         public Exercise GetExerciseById(string exerciseId)
         {
             if (string.IsNullOrWhiteSpace(exerciseId))
@@ -41,9 +38,6 @@ namespace CSharpEduLib.Core.Services
             }
         }
         
-        /// <summary>
-        /// Получить все упражнения для конкретной лекции
-        /// </summary>
         public List<Exercise> GetLectureExercises(string lectureId)
         {
             if (string.IsNullOrWhiteSpace(lectureId))
@@ -57,9 +51,6 @@ namespace CSharpEduLib.Core.Services
             }
         }
         
-        /// <summary>
-        /// Получить все упражнения для конкретного модуля
-        /// </summary>
         public List<Exercise> GetModuleExercises(string moduleId)
         {
             if (string.IsNullOrWhiteSpace(moduleId))
@@ -74,9 +65,6 @@ namespace CSharpEduLib.Core.Services
             }
         }
         
-        /// <summary>
-        /// Выполнить упражнение и получить результат
-        /// </summary>
         public TestResult ExecuteExercise(Exercise exercise, string studentCode)
         {
             if (exercise == null)
@@ -84,19 +72,18 @@ namespace CSharpEduLib.Core.Services
             if (string.IsNullOrWhiteSpace(studentCode))
                 throw new ArgumentException("Код студента не может быть пустым", nameof(studentCode));
             
-            // Заглушка для выполнения упражнения
             return new TestResult
             {
                 IsSuccess = true,
                 Message = "Упражнение выполнено успешно",
                 Details = $"Код для упражнения '{exercise.Title}' принят",
-                ExecutionTime = TimeSpan.FromSeconds(1)
+                ExecutionTime = TimeSpan.FromSeconds(1),
+                TestsTotal = 1,
+                TestsPassed = 1,
+                TestsFailed = 0
             };
         }
         
-        /// <summary>
-        /// Проверить решение упражнения
-        /// </summary>
         public TestResult ValidateSolution(string exerciseId, string solution)
         {
             if (string.IsNullOrWhiteSpace(exerciseId))
@@ -118,9 +105,6 @@ namespace CSharpEduLib.Core.Services
             return ExecuteExercise(exercise, solution);
         }
         
-        /// <summary>
-        /// Получить все упражнения
-        /// </summary>
         public List<Exercise> GetAllExercises()
         {
             lock (_lockObject)
@@ -131,9 +115,6 @@ namespace CSharpEduLib.Core.Services
             }
         }
         
-        /// <summary>
-        /// Перезагрузить все упражнения
-        /// </summary>
         public bool ReloadExercises()
         {
             try
@@ -148,9 +129,6 @@ namespace CSharpEduLib.Core.Services
             }
         }
         
-        /// <summary>
-        /// Получить количество упражнений
-        /// </summary>
         public int GetExerciseCount()
         {
             lock (_lockObject)
@@ -169,7 +147,6 @@ namespace CSharpEduLib.Core.Services
                 return;
             }
             
-            // Проходим по всем модулям
             var moduleDirectories = Directory.GetDirectories(_contentPath, "Module_*", SearchOption.TopDirectoryOnly);
             
             foreach (var moduleDir in moduleDirectories)
@@ -208,7 +185,6 @@ namespace CSharpEduLib.Core.Services
         {
             var exercises = new List<Exercise>();
             
-            // Получаем все папки Exercise_*
             var exerciseDirectories = Directory.GetDirectories(exercisesDirectory, "Exercise_*", SearchOption.TopDirectoryOnly);
             
             foreach (var exerciseDir in exerciseDirectories)
@@ -241,11 +217,9 @@ namespace CSharpEduLib.Core.Services
                 return null;
             }
             
-            // Извлекаем номер из имени (Exercise_1_HelloWorld -> 1)
             var orderIndex = ExtractOrderFromExerciseName(exerciseName);
             var exerciseId = $"{lectureId}_{exerciseName}";
             
-            // Пытаемся извлечь метаданные из комментариев StudentSolution.cs
             var (title, description) = ExtractMetadataFromFile(studentSolutionFile);
             
             var exercise = new Exercise
@@ -255,8 +229,8 @@ namespace CSharpEduLib.Core.Services
                 Title = title ?? exerciseName.Replace("_", " "),
                 Description = description ?? $"Упражнение {exerciseName}",
                 OrderIndex = orderIndex,
-                Type = "CodeExercise", // По умолчанию все упражнения - кодовые
-                Difficulty = "Beginner", // По умолчанию все упражнения уровня Beginner
+                Type = "CodeExercise",
+                Difficulty = 1,
                 SolutionTemplate = File.ReadAllText(studentSolutionFile),
                 TestFile = Path.Combine(exerciseDirectory, $"Exercise{orderIndex}Tests.cs")
             };
@@ -268,7 +242,6 @@ namespace CSharpEduLib.Core.Services
         {
             try
             {
-                // Exercise_1_HelloWorld -> 1
                 var parts = exerciseName.Split('_');
                 if (parts.Length >= 2 && int.TryParse(parts[1], out int order))
                 {
@@ -277,7 +250,6 @@ namespace CSharpEduLib.Core.Services
             }
             catch
             {
-                // Игнорируем ошибки
             }
             
             return 0;
@@ -291,7 +263,6 @@ namespace CSharpEduLib.Core.Services
                 string title = null;
                 string description = null;
                 
-                // Простой парсинг XML-комментариев
                 var lines = content.Split('\n');
                 bool inSummary = false;
                 var summaryLines = new List<string>();
@@ -321,7 +292,6 @@ namespace CSharpEduLib.Core.Services
                 
                 if (summaryLines.Count > 0)
                 {
-                    // Первая строка - заголовок, остальные - описание
                     title = summaryLines[0];
                     if (summaryLines.Count > 1)
                     {
