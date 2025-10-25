@@ -1,4 +1,4 @@
-using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,7 +58,6 @@ namespace CSharpEduLib.Core.Utils
         
         public static string GenerateId(string prefix = "id")
         {
-            // Заменяем индексный оператор ^ и срезы на совместимые с C# 7.3 конструкции
             var guid = Guid.NewGuid().ToString("N");
             var shortGuid = guid.Substring(0, Math.Min(8, guid.Length));
             return $"{prefix}_{DateTime.Now:yyyyMMdd_HHmmss}_{shortGuid}";
@@ -122,7 +121,6 @@ namespace CSharpEduLib.Core.Utils
             if (testResult == null)
                 return new Dictionary<string, object>();
             
-            // Заменяем обращения к несуществующим полям на универсальные
             var total = testResult.TestsTotal;
             var passed = testResult.TestsPassed;
             var successRate = CalculatePercentage(passed, total);
