@@ -1,9 +1,121 @@
 [
-  {"Id":"m1l2-ex6","Title":"Разность int","Description":"Считайте два int и выведите разность a-b","Requirements":"int.Parse","Example":"10 и 3 -> 7","MaxScore":10,"Difficulty":1,"Order":6},
-  {"Id":"m1l2-ex7","Title":"Произведение double","Description":"Считайте два double и выведите произведение","Requirements":"Учитывать десятичный разделитель","Example":"1.5 и 2 -> 3","MaxScore":10,"Difficulty":2,"Order":7},
-  {"Id":"m1l2-ex8","Title":"Целая часть","Description":"Считайте double и выведите целую часть","Requirements":"(int)x","Example":"3.9 -> 3","MaxScore":10,"Difficulty":2,"Order":8},
-  {"Id":"m1l2-ex9","Title":"Округление","Description":"Считайте double и выведите округленное значение","Requirements":"Math.Round(x)","Example":"2.49 -> 2","MaxScore":10,"Difficulty":2,"Order":9},
-  {"Id":"m1l2-ex10","Title":"Булев результат","Description":"Считайте два int и выведите true, если a>b","Requirements":"bool и Console.WriteLine","Example":"5 и 3 -> true","MaxScore":10,"Difficulty":1,"Order":10},
-  {"Id":"m1l2-ex11","Title":"Код символа","Description":"Считайте символ и выведите его код","Requirements":"(int)char","Example":"'A' -> 65","MaxScore":10,"Difficulty":2,"Order":11},
-  {"Id":"m1l2-ex12","Title":"Строка и число","Description":"Считайте строку и число, выведите 'str=N'","Requirements":"Интерполяция","Example":"Hello и 7 -> str=Hello, N=7","MaxScore":10,"Difficulty":1,"Order":12}
+  {
+    "Id": "m1l2-ex6",
+    "Title": "Разность двух чисел",
+    "Description": "Считайте два целых числа a и b. Каждое число с новой строки. Выведите разность a - b.",
+    "Requirements": "Использовать int.Parse. Вывод только число - результат вычисления.",
+    "InputFormat": "Первая строка: число a\nВторая строка: число b",
+    "OutputFormat": "Одно число - разность a - b",
+    "TestCases": [
+      {"Input": "10\n3", "ExpectedOutput": "7"},
+      {"Input": "5\n8", "ExpectedOutput": "-3"},
+      {"Input": "0\n0", "ExpectedOutput": "0"},
+      {"Input": "-5\n-2", "ExpectedOutput": "-3"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 6
+  },
+  {
+    "Id": "m1l2-ex7",
+    "Title": "Произведение вещественных чисел",
+    "Description": "Считайте два вещественных числа. Каждое число с новой строки. Выведите их произведение с одним знаком после запятой.",
+    "Requirements": "Округление до 1 знака после запятой.",
+    "InputFormat": "Первая строка: число a (double)\nВторая строка: число b (double)",
+    "OutputFormat": "Одно число - произведение с 1 знаком после запятой",
+    "TestCases": [
+      {"Input": "1.5\n2.0", "ExpectedOutput": "3.0"},
+      {"Input": "2.3\n4.1", "ExpectedOutput": "9.4"},
+      {"Input": "0.1\n0.1", "ExpectedOutput": "0.0"},
+      {"Input": "-2.5\n3.0", "ExpectedOutput": "-7.5"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 7
+  },
+  {
+    "Id": "m1l2-ex8",
+    "Title": "Целая часть числа",
+    "Description": "Считайте вещественное число. Выведите целую часть (отбросив дробную часть).",
+    "Requirements": "Использовать явное приведение (int)x. Не округлять, а отбрасывать.",
+    "InputFormat": "Одно вещественное число",
+    "OutputFormat": "Одно целое число - целая часть",
+    "TestCases": [
+      {"Input": "3.9", "ExpectedOutput": "3"},
+      {"Input": "7.1", "ExpectedOutput": "7"},
+      {"Input": "-2.8", "ExpectedOutput": "-2"},
+      {"Input": "0.99", "ExpectedOutput": "0"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 8
+  },
+  {
+    "Id": "m1l2-ex9",
+    "Title": "Округление числа",
+    "Description": "Считайте вещественное число. Выведите округленное до ближайшего целого значение.",
+    "Requirements": "Использовать Math.Round(x). Вывести как целое число.",
+    "InputFormat": "Одно вещественное число",
+    "OutputFormat": "Одно целое число - округленное значение",
+    "TestCases": [
+      {"Input": "2.49", "ExpectedOutput": "2"},
+      {"Input": "2.51", "ExpectedOutput": "3"},
+      {"Input": "3.5", "ExpectedOutput": "4"},
+      {"Input": "-1.7", "ExpectedOutput": "-2"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 9
+  },
+  {
+    "Id": "m1l2-ex10",
+    "Title": "Сравнение чисел",
+    "Description": "Считайте два целых числа a и b. Каждое число с новой строки. Выведите true, если a > b, иначе false.",
+    "Requirements": "Использовать bool и Console.WriteLine. Точно true или false (с маленькой буквы).",
+    "InputFormat": "Первая строка: число a\nВторая строка: число b",
+    "OutputFormat": "True или False (прописными буквами)",
+    "TestCases": [
+      {"Input": "5\n3", "ExpectedOutput": "True"},
+      {"Input": "2\n7", "ExpectedOutput": "False"},
+      {"Input": "4\n4", "ExpectedOutput": "False"},
+      {"Input": "-1\n-5", "ExpectedOutput": "True"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 10
+  },
+  {
+    "Id": "m1l2-ex11",
+    "Title": "Код символа",
+    "Description": "Считайте один символ с клавиатуры. Выведите его ASCII-код.",
+    "Requirements": "Использовать явное приведение (int)char. Считывать первый символ строки.",
+    "InputFormat": "Одна строка (берем первый символ)",
+    "OutputFormat": "Одно целое число - ASCII-код",
+    "TestCases": [
+      {"Input": "A", "ExpectedOutput": "65"},
+      {"Input": "a", "ExpectedOutput": "97"},
+      {"Input": "0", "ExpectedOutput": "48"},
+      {"Input": " ", "ExpectedOutput": "32"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 2,
+    "Order": 11
+  },
+  {
+    "Id": "m1l2-ex12",
+    "Title": "Объединение строки и числа",
+    "Description": "Считайте строку и целое число. Каждое значение с новой строки. Выведите в формате \"str=строка, N=число\".",
+    "Requirements": "Использовать интерполяцию строк. Точный формат: \"str=строка, N=число\".",
+    "InputFormat": "Первая строка: строка\nВторая строка: число",
+    "OutputFormat": "\"str=строка, N=число\"",
+    "TestCases": [
+      {"Input": "Hello\n7", "ExpectedOutput": "str=Hello, N=7"},
+      {"Input": "World\n42", "ExpectedOutput": "str=World, N=42"},
+      {"Input": "Test\n0", "ExpectedOutput": "str=Test, N=0"},
+      {"Input": "C#\n-1", "ExpectedOutput": "str=C#, N=-1"}
+    ],
+    "MaxScore": 10,
+    "Difficulty": 1,
+    "Order": 12
+  }
 ]
