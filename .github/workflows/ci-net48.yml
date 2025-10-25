@@ -33,6 +33,9 @@ jobs:
             Write-Host "coverlet already installed"
           }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
+          $coverlet = Join-Path $env:USERPROFILE ".dotnet\tools\coverlet"
+          if (-not (Test-Path $coverlet)) { $coverlet = "coverlet" }
+          
           $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
           if (-not (Test-Path $testResults)) { New-Item -ItemType Directory -Force -Path $testResults | Out-Null }
           
@@ -43,9 +46,7 @@ jobs:
           foreach ($t in $tests) {
             $outFile = Join-Path $testResults ("coverage_" + $t.BaseName + ".xml")
             Write-Host "Running coverage for: $($t.FullName)"
-            
-            # Correct coverlet.console syntax for version 6.0.4+
-            coverlet.console "$($t.FullName)" --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$outFile"
+            & $coverlet "$($t.FullName)" --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$outFile"
           }
 
       - name: ReportGenerator
