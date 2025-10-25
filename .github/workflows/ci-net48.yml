@@ -35,12 +35,17 @@ jobs:
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
           $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
           if (-not (Test-Path $testResults)) { New-Item -ItemType Directory -Force -Path $testResults | Out-Null }
+          
           # Поиск тестовых сборок (.NET Framework 4.8)
           $tests = Get-ChildItem -Recurse -Filter CSharpEduLib.Tests.dll | Where-Object { $_.FullName -match "\\bin\\Release\\" -and $_.FullName -notmatch "ref|TestHost|TestAdapter|TestFramework" }
           if (-not $tests) { Write-Host "No test assemblies found"; exit 1 }
+          
           foreach ($t in $tests) {
             $outFile = Join-Path $testResults ("coverage_" + $t.BaseName + ".xml")
-            coverlet $t.FullName --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$outFile"
+            Write-Host "Running coverage for: $($t.FullName)"
+            
+            # Correct coverlet.console syntax for version 6.0.4+
+            coverlet.console "$($t.FullName)" --target "vstest.console.exe" --targetargs "\"$($t.FullName)\" /Framework:.NETFramework,Version=v4.8" --format cobertura --output "$outFile"
           }
 
       - name: ReportGenerator
@@ -54,7 +59,17 @@ jobs:
           }
           $env:Path += ";$env:USERPROFILE\.dotnet\tools"
           $testResults = Join-Path -Path (Get-Location) -ChildPath "TestResults"
-          if (-not (Test-Path $testResults)) { Write-Host "No TestResults directory"; exit 0 }
+          if (-not (Test-Path $testResults)) { 
+            Write-Host "No TestResults directory found, skipping report generation"
+            exit 0 
+          }
+          
+          $coverageFiles = Get-ChildItem -Path $testResults -Filter "*.xml" | Measure-Object
+          if ($coverageFiles.Count -eq 0) {
+            Write-Host "No coverage files found in TestResults, skipping report generation"
+            exit 0
+          }
+          
           reportgenerator -reports:"$testResults/*.xml" -targetdir:"CoverageReport" -reporttypes:Html
 
       - name: Upload coverage artifact
