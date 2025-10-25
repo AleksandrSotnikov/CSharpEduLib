@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +14,6 @@ namespace CSharpEduLib.Core.Utils
     /// </summary>
     public static class Helpers
     {
-        /// <summary>
-        /// Форматировать время выполнения
-        /// </summary>
-        /// <param name="milliseconds">Миллисекунды</param>
-        /// <returns>Отформатированная строка</returns>
         public static string FormatExecutionTime(long milliseconds)
         {
             if (milliseconds < 1000)
@@ -32,33 +27,17 @@ namespace CSharpEduLib.Core.Utils
             return $"{minutes} мин {seconds:F2} с";
         }
         
-        /// <summary>
-        /// Форматировать процент
-        /// </summary>
-        /// <param name="value">Значение</param>
-        /// <param name="total">Общее значение</param>
-        /// <returns>Процент</returns>
         public static double CalculatePercentage(int value, int total)
         {
             if (total == 0) return 0;
             return (double)value / total * 100;
         }
         
-        /// <summary>
-        /// Форматировать процент как строку
-        /// </summary>
-        /// <param name="percentage">Процент</param>
-        /// <returns>Отформатированная строка</returns>
         public static string FormatPercentage(double percentage)
         {
             return $"{percentage:F1}%";
         }
         
-        /// <summary>
-        /// Получить оценку по процентам
-        /// </summary>
-        /// <param name="percentage">Процент выполнения</param>
-        /// <returns>Оценка</returns>
         public static string GetGradeByPercentage(double percentage)
         {
             if (percentage >= 90) return "Отлично";
@@ -68,11 +47,6 @@ namespace CSharpEduLib.Core.Utils
             return "Низкий уровень";
         }
         
-        /// <summary>
-        /// Получить цвет по оценке
-        /// </summary>
-        /// <param name="percentage">Процент</param>
-        /// <returns>Название цвета</returns>
         public static string GetColorByPercentage(double percentage)
         {
             if (percentage >= 90) return "Green";
@@ -82,27 +56,19 @@ namespace CSharpEduLib.Core.Utils
             return "Red";
         }
         
-        /// <summary>
-        /// Сгенерировать случайный ID
-        /// </summary>
-        /// <param name="prefix">Префикс</param>
-        /// <returns>Уникальный идентификатор</returns>
         public static string GenerateId(string prefix = "id")
         {
-            return $"{prefix}_{DateTime.Now:yyyyMMdd_HHmmss}_{Guid.NewGuid().ToString("N")[..8]}";
+            // Заменяем индексный оператор ^ и срезы на совместимые с C# 7.3 конструкции
+            var guid = Guid.NewGuid().ToString("N");
+            var shortGuid = guid.Substring(0, Math.Min(8, guid.Length));
+            return $"{prefix}_{DateTime.Now:yyyyMMdd_HHmmss}_{shortGuid}";
         }
         
-        /// <summary>
-        /// Очистить код от лишних пробелов и символов
-        /// </summary>
-        /// <param name="code">Код</param>
-        /// <returns>Очищенный код</returns>
         public static string CleanCode(string code)
         {
             if (string.IsNullOrWhiteSpace(code))
                 return string.Empty;
             
-            // Удаляем лишние пробелы и переносы строк
             var lines = code.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
                            .Select(line => line.Trim())
                            .Where(line => !string.IsNullOrEmpty(line))
@@ -111,11 +77,6 @@ namespace CSharpEduLib.Core.Utils
             return string.Join(Environment.NewLine, lines);
         }
         
-        /// <summary>
-        /// Получить краткое описание ошибки
-        /// </summary>
-        /// <param name="exception">Исключение</param>
-        /// <returns>Краткое описание</returns>
         public static string GetShortErrorDescription(Exception exception)
         {
             if (exception == null) return "Неизвестная ошибка";
@@ -127,28 +88,20 @@ namespace CSharpEduLib.Core.Utils
             return $"{exception.GetType().Name}: {message}";
         }
         
-        /// <summary>
-        /// Проверить, является ли строка валидным идентификатором C#
-        /// </summary>
-        /// <param name="identifier">Идентификатор</param>
-        /// <returns>True, если валидный</returns>
         public static bool IsValidCSharpIdentifier(string identifier)
         {
             if (string.IsNullOrWhiteSpace(identifier))
                 return false;
             
-            // Проверяем первый символ
             if (!char.IsLetter(identifier[0]) && identifier[0] != '_')
                 return false;
             
-            // Проверяем остальные символы
             for (int i = 1; i < identifier.Length; i++)
             {
                 if (!char.IsLetterOrDigit(identifier[i]) && identifier[i] != '_')
                     return false;
             }
             
-            // Проверяем, не является ли зарезервированным словом
             var reservedKeywords = new HashSet<string>
             {
                 "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked",
@@ -164,28 +117,27 @@ namespace CSharpEduLib.Core.Utils
             return !reservedKeywords.Contains(identifier.ToLower());
         }
         
-        /// <summary>
-        /// Получить статистику по тестам
-        /// </summary>
-        /// <param name="testResult">Результат теста</param>
-        /// <returns>Статистика</returns>
         public static Dictionary<string, object> GetTestStatistics(TestResult testResult)
         {
             if (testResult == null)
                 return new Dictionary<string, object>();
             
-            var successRate = CalculatePercentage(testResult.PassedTests, testResult.TotalTests);
-            var scoreRate = CalculatePercentage(testResult.Score, testResult.MaxScore);
+            // Заменяем обращения к несуществующим полям на универсальные
+            var total = testResult.TestsTotal;
+            var passed = testResult.TestsPassed;
+            var successRate = CalculatePercentage(passed, total);
+            
+            var execTimeMs = (long) (testResult.ExecutionTime.TotalMilliseconds);
             
             return new Dictionary<string, object>
             {
                 ["SuccessRate"] = successRate,
-                ["ScoreRate"] = scoreRate,
-                ["Grade"] = GetGradeByPercentage(scoreRate),
-                ["Color"] = GetColorByPercentage(scoreRate),
-                ["FormattedTime"] = FormatExecutionTime(testResult.ExecutionTimeMs),
-                ["HasErrors"] = testResult.Errors.Any(),
-                ["ErrorCount"] = testResult.Errors.Count
+                ["Grade"] = GetGradeByPercentage(successRate),
+                ["Color"] = GetColorByPercentage(successRate),
+                ["FormattedTime"] = FormatExecutionTime(execTimeMs),
+                ["HasErrors"] = (testResult.CompilationErrors != null && testResult.CompilationErrors.Any()) ||
+                                 (testResult.RuntimeErrors != null && testResult.RuntimeErrors.Any()),
+                ["ErrorCount"] = (testResult.CompilationErrors?.Count ?? 0) + (testResult.RuntimeErrors?.Count ?? 0)
             };
         }
     }
