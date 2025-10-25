@@ -1,0 +1,40 @@
+name: .NET Framework build + tests
+
+on:
+  push:
+    branches: [ feature/enhanced-utilities-and-exercises ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_and_test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore CSharpEduLib.sln
+
+      - name: Build solution (Release)
+        run: msbuild CSharpEduLib.sln /t:Rebuild /p:Configuration=Release
+
+      - name: Install NUnit Console Runner
+        run: nuget install NUnit.ConsoleRunner -Version 3.16.3 -OutputDirectory tools
+
+      - name: Run NUnit tests
+        run: |
+          tools\NUnit.ConsoleRunner.3.16.3\tools\nunit3-console.exe tests\CSharpEduLib.Tests\bin\Release\CSharpEduLib.Tests.dll --result TestResult.xml;format=nunit2
+
+      - name: Publish test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nunit-test-results
+          path: TestResult.xml
