@@ -1,0 +1,12 @@
+[
+  {
+    "Id": "hello-world",
+    "Title": "Hello World",
+    "Description": "Классическая первая программа",
+    "Code": "using System;\n\nnamespace HelloWorld\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Привет, мир!\");\n            Console.ReadKey();\n        }\n    }\n}",
+    "Category": "Basics",
+    "Difficulty": "Beginner",
+    "ExpectedOutput": "Привет, мир!",
+    "Tags": ["hello-world", "console", "basics"]
+  }
+]
