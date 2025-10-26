@@ -1,0 +1,253 @@
+{
+  "exercises": [
+    {
+      "id": "exercise1",
+      "title": "Проверка возраста",
+      "description": "Напишите программу, которая проверяет возраст и определяет, является ли человек совершеннолетним (от 18 лет)",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise1",
+      "className": "AgeCheckExercise",
+      "methodName": "CheckAge",
+      "parameters": [
+        {
+          "name": "age",
+          "type": "int"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Если возраст >= 18, вернуть 'Совершеннолетний'",
+        "Иначе вернуть 'Несовершеннолетний'",
+        "Если возраст отрицательный, вернуть 'Некорректный возраст'"
+      ]
+    },
+    {
+      "id": "exercise2",
+      "title": "Определение оценки по баллам",
+      "description": "Напишите метод, который по количеству баллов (0-100) определяет оценку",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise2",
+      "className": "GradingExercise",
+      "methodName": "GetGrade",
+      "parameters": [
+        {
+          "name": "score",
+          "type": "int"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "90-100: 'Отлично'",
+        "80-89: 'Хорошо'",
+        "70-79: 'Удовлетворительно'",
+        "60-69: 'Неудовлетворительно'",
+        "Меньше 60: 'Плохо'",
+        "Некорректные баллы (меньше 0 или больше 100): 'Ошибка'"
+      ]
+    },
+    {
+      "id": "exercise3",
+      "title": "Калькулятор с выбором операции",
+      "description": "Создайте калькулятор, который выполняет основные арифметические операции на основе символа операции",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise3",
+      "className": "CalculatorExercise",
+      "methodName": "Calculate",
+      "parameters": [
+        {
+          "name": "num1",
+          "type": "double"
+        },
+        {
+          "name": "num2",
+          "type": "double"
+        },
+        {
+          "name": "operation",
+          "type": "char"
+        }
+      ],
+      "returnType": "double",
+      "requirements": [
+        "Поддерживать операции: +, -, *, /",
+        "При делении на ноль вернуть double.NaN",
+        "При неизвестной операции вернуть double.NaN"
+      ]
+    },
+    {
+      "id": "exercise4",
+      "title": "Switch-конструкции с enum",
+      "description": "Создайте enum DayOfWeek и метод, который определяет, является ли день рабочим или выходным",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise4",
+      "className": "DayTypeExercise",
+      "methodName": "GetDayType",
+      "parameters": [
+        {
+          "name": "day",
+          "type": "DayOfWeek"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Понедельник-Пятница: 'Рабочий день'",
+        "Суббота-Воскресенье: 'Выходной день'",
+        "Использовать switch-конструкцию"
+      ]
+    },
+    {
+      "id": "exercise5",
+      "title": "Комплексные условия",
+      "description": "Напишите метод, который определяет, можно ли сформировать треугольник из трех сторон",
+      "description_extended": "Для треугольника должно соблюдаться правило: сумма любых двух сторон должна быть больше третьей стороны",
+      "difficulty": 3,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise5",
+      "className": "TriangleExercise",
+      "methodName": "CanFormTriangle",
+      "parameters": [
+        {
+          "name": "side1",
+          "type": "double"
+        },
+        {
+          "name": "side2",
+          "type": "double"
+        },
+        {
+          "name": "side3",
+          "type": "double"
+        }
+      ],
+      "returnType": "bool",
+      "requirements": [
+        "Проверить, что все стороны положительные",
+        "Проверить неравенство треугольника для каждой пары сторон",
+        "Если любая сторона <= 0, вернуть false"
+      ]
+    },
+    {
+      "id": "exercise6",
+      "title": "Тройные операторы в практике",
+      "description": "Напишите метод, который находит максимум из трех чисел, используя только тройные операторы",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise6",
+      "className": "TernaryExercise",
+      "methodName": "FindMaxOfThree",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int"
+        },
+        {
+          "name": "c",
+          "type": "int"
+        }
+      ],
+      "returnType": "int",
+      "requirements": [
+        "Использовать только тройные операторы (?:)",
+        "Не использовать if-else или switch",
+        "Вернуть наибольшее из трех чисел"
+      ]
+    },
+    {
+      "id": "exercise7",
+      "title": "Проверка диапазонов",
+      "description": "Создайте метод, который определяет квартал года по номеру месяца",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise7",
+      "className": "QuarterExercise",
+      "methodName": "GetQuarter",
+      "parameters": [
+        {
+          "name": "month",
+          "type": "int"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "1-3 месяц: '1 квартал'",
+        "4-6 месяц: '2 квартал'",
+        "7-9 месяц: '3 квартал'",
+        "10-12 месяц: '4 квартал'",
+        "Некорректный месяц: 'Ошибка'"
+      ]
+    },
+    {
+      "id": "exercise8",
+      "title": "Обработка break в switch",
+      "description": "Напишите метод, который преобразует цифровое значение оценки (1-5) в текстовое описание",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise8",
+      "className": "GradeTextExercise",
+      "methodName": "GetGradeText",
+      "parameters": [
+        {
+          "name": "grade",
+          "type": "int"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "1: 'Плохо'",
+        "2: 'Неудовлетворительно'",
+        "3: 'Удовлетворительно'",
+        "4: 'Хорошо'",
+        "5: 'Отлично'",
+        "Некорректная оценка: 'Ошибка'",
+        "Использовать switch-конструкцию"
+      ]
+    },
+    {
+      "id": "exercise9",
+      "title": "Вложенные условия",
+      "description": "Создайте метод, который определяет тип символа: буква, цифра или специальный символ, а для букв дополнительно определяет регистр",
+      "difficulty": 3,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise9",
+      "className": "CharTypeExercise",
+      "methodName": "GetCharType",
+      "parameters": [
+        {
+          "name": "character",
+          "type": "char"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Для заглавных букв: 'Большая буква'",
+        "Для строчных букв: 'Маленькая буква'",
+        "Для цифр: 'Цифра'",
+        "Для остальных символов: 'Спецсимвол'",
+        "Использовать вложенные if-конструкции"
+      ]
+    },
+    {
+      "id": "exercise10",
+      "title": "Комбинирование всех видов условных конструкций",
+      "description": "Напишите комплексный метод оценки пароля, который использует все типы условных конструкций",
+      "difficulty": 4,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture14.Exercises.Exercise10",
+      "className": "PasswordValidatorExercise",
+      "methodName": "EvaluatePassword",
+      "parameters": [
+        {
+          "name": "password",
+          "type": "string"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Проверка на null или пустоту: 'Пустой пароль'",
+        "Длина < 4: 'Очень слабый'",
+        "Длина 4-7: 'Слабый'",
+        "Длина 8+ с цифрами и буквами разного регистра: 'Сильный'",
+        "Длина 8+, но не хватает разнообразия: 'Средний'",
+        "Использовать if-else, switch, тройные операторы в одном методе"
+      ]
+    }
+  ]
+}
