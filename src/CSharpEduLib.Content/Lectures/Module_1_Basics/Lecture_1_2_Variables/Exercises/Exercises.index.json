@@ -1,0 +1,7 @@
+{
+  "exercises": [
+    {"id":"ex1","title":"DeclaringVariables"},
+    {"id":"ex2","title":"TypeConversions"},
+    {"id":"ex3","title":"ParseAndTryParse"}
+  ]
+}
