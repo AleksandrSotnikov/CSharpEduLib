@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ex01",
+    "title": "Основные арифметические операции",
+    "code": "int a = 15, b = 4;\nConsole.WriteLine($\"Сложение: {a} + {b} = {a + b}\");\nConsole.WriteLine($\"Вычитание: {a} - {b} = {a - b}\");\nConsole.WriteLine($\"Умножение: {a} * {b} = {a * b}\");\nConsole.WriteLine($\"Деление: {a} / {b} = {a / b}\");\nConsole.WriteLine($\"Остаток: {a} % {b} = {a % b}\");",
+    "output": "Сложение: 15 + 4 = 19\nВычитание: 15 - 4 = 11\nУмножение: 15 * 4 = 60\nДеление: 15 / 4 = 3\nОстаток: 15 % 4 = 3"
+  },
+  {
+    "id": "ex02",
+    "title": "Целочисленное и вещественное деление",
+    "code": "int x = 7, y = 2;\nConsole.WriteLine($\"Целочисленное деление: {x} / {y} = {x / y}\");\nConsole.WriteLine($\"Вещественное деление: {x} / {y} = {(double)x / y}\");\nConsole.WriteLine($\"С литералом double: {x} / 2.0 = {x / 2.0}\");",
+    "output": "Целочисленное деление: 7 / 2 = 3\nВещественное деление: 7 / 2 = 3.5\nС литералом double: 7 / 2.0 = 3.5"
+  },
+  {
+    "id": "ex03",
+    "title": "Операторы сравнения",
+    "code": "int num1 = 10, num2 = 20;\nConsole.WriteLine($\"{num1} == {num2}: {num1 == num2}\");\nConsole.WriteLine($\"{num1} != {num2}: {num1 != num2}\");\nConsole.WriteLine($\"{num1} < {num2}: {num1 < num2}\");\nConsole.WriteLine($\"{num1} > {num2}: {num1 > num2}\");\nConsole.WriteLine($\"{num1} <= {num2}: {num1 <= num2}\");\nConsole.WriteLine($\"{num1} >= {num2}: {num1 >= num2}\");",
+    "output": "10 == 20: False\n10 != 20: True\n10 < 20: True\n10 > 20: False\n10 <= 20: True\n10 >= 20: False"
+  },
+  {
+    "id": "ex04",
+    "title": "Сравнение строк",
+    "code": "string str1 = \"Hello\";\nstring str2 = \"hello\";\nstring str3 = \"Hello\";\nConsole.WriteLine($\"{str1} == {str2}: {str1 == str2}\");\nConsole.WriteLine($\"{str1} == {str3}: {str1 == str3}\");\nConsole.WriteLine($\"ToLower: {str1.ToLower() == str2}\");",
+    "output": "Hello == hello: False\nHello == Hello: True\nToLower: True"
+  },
+  {
+    "id": "ex05",
+    "title": "Логические операторы - И (&&)",
+    "code": "bool a = true, b = false, c = true;\nConsole.WriteLine($\"{a} && {b}: {a && b}\");\nConsole.WriteLine($\"{a} && {c}: {a && c}\");\nConsole.WriteLine($\"{b} && {c}: {b && c}\");\n\nint age = 25;\nbool hasLicense = true;\nbool canDrive = age >= 18 && hasLicense;\nConsole.WriteLine($\"Может водить: {canDrive}\");",
+    "output": "True && False: False\nTrue && True: True\nFalse && True: False\nМожет водить: True"
+  },
+  {
+    "id": "ex06",
+    "title": "Логические операторы - ИЛИ (||)",
+    "code": "bool x = true, y = false, z = false;\nConsole.WriteLine($\"{x} || {y}: {x || y}\");\nConsole.WriteLine($\"{y} || {z}: {y || z}\");\n\nbool isWeekend = true;\nbool isHoliday = false;\nbool canRest = isWeekend || isHoliday;\nConsole.WriteLine($\"Можно отдыхать: {canRest}\");",
+    "output": "True || False: True\nFalse || False: False\nМожно отдыхать: True"
+  },
+  {
+    "id": "ex07",
+    "title": "Логический оператор НЕ (!)",
+    "code": "bool isRaining = false;\nbool isSunny = !isRaining;\nConsole.WriteLine($\"Дождь: {isRaining}, Солнечно: {isSunny}\");\n\nbool isWorking = true;\nConsole.WriteLine($\"Не работает: {!isWorking}\");",
+    "output": "Дождь: False, Солнечно: True\nНе работает: False"
+  },
+  {
+    "id": "ex08",
+    "title": "Короткое замыкание (Short-Circuit)",
+    "code": "int a = 0;\nbool result = (a != 0) && (10 / a > 1);\nConsole.WriteLine($\"Результат: {result}\");\n\nbool condition = true || (++a > 0);\nConsole.WriteLine($\"a = {a}\");",
+    "output": "Результат: False\na = 0"
+  },
+  {
+    "id": "ex09",
+    "title": "Операторы присваивания",
+    "code": "int number = 10;\nConsole.WriteLine($\"Начальное значение: {number}\");\n\nnumber += 5;\nConsole.WriteLine($\"После += 5: {number}\");\n\nnumber -= 3;\nConsole.WriteLine($\"После -= 3: {number}\");\n\nnumber *= 2;\nConsole.WriteLine($\"После *= 2: {number}\");\n\nnumber /= 4;\nConsole.WriteLine($\"После /= 4: {number}\");\n\nnumber %= 4;\nConsole.WriteLine($\"После %= 4: {number}\");",
+    "output": "Начальное значение: 10\nПосле += 5: 15\nПосле -= 3: 12\nПосле *= 2: 24\nПосле /= 4: 6\nПосле %= 4: 2"
+  },
+  {
+    "id": "ex10",
+    "title": "Префиксный инкремент",
+    "code": "int i = 5;\nConsole.WriteLine($\"i = {i}\");\nConsole.WriteLine($\"++i = {++i}\");\nConsole.WriteLine($\"i после ++i = {i}\");",
+    "output": "i = 5\n++i = 6\ni после ++i = 6"
+  }
+]
