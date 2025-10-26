@@ -11,6 +11,19 @@
     {"id":"ex09","title":"Значения по умолчанию","code":"int iDefault = default; bool bDefault = default;"},
     {"id":"ex10","title":"Тип char","code":"char c1 = 'A'; char c2 = (char)65;"},
     {"id":"ex11","title":"Интерполяция строк","code":"int n = 5; string s = $\"n = {n}\";"},
-    {"id":"ex12","title":"Преобразования decimal","code":"decimal m = 10.5m; double d2 = (double)m; decimal m2 = (decimal)d2;"}
+    {"id":"ex12","title":"Преобразования decimal","code":"decimal m = 10.5m; double d2 = (double)m; decimal m2 = (decimal)d2;"},
+    {"id":"ex13","title":"Convert.ToInt32","code":"int i = Convert.ToInt32(3.9);"},
+    {"id":"ex14","title":"TryParse с культурой","code":"var ci = new System.Globalization.CultureInfo(\"ru-RU\"); bool ok = double.TryParse(\"3,14\", NumberStyles.Float, ci, out double val);"},
+    {"id":"ex15","title":"Boxing/Unboxing","code":"int x = 10; object bx = x; int y = (int)bx;"},
+    {"id":"ex16","title":"var и явные типы","code":"var sum = 1 + 2; int s = sum;"},
+    {"id":"ex17","title":"default(T)","code":"DateTime dt = default;"},
+    {"id":"ex18","title":"checked умножение","code":"checked { int big = 50_000; int p = big * big; }"},
+    {"id":"ex19","title":"Parse для bool/char","code":"bool b = bool.Parse(\"True\"); char c = char.Parse(\"A\");"},
+    {"id":"ex20","title":"TryParse для Enum","code":"enum Color { Red, Green, Blue } bool ok = Enum.TryParse(\"Green\", out Color c);"},
+    {"id":"ex21","title":"Форматирование чисел","code":"double v = 1234.56; string s1 = v.ToString(\"F2\");"},
+    {"id":"ex22","title":"Инкремент/декремент","code":"int a1 = 1; a1++; --a1;"},
+    {"id":"ex23","title":"Длина массива","code":"int[] arr = new int[3]; int len = arr.Length;"},
+    {"id":"ex24","title":"Nullable","code":"int? ni = null; bool has = ni.HasValue;"},
+    {"id":"ex25","title":"Convert.ToByte","code":"string s = \"255\"; byte b = Convert.ToByte(s);"}
   ]
 }
