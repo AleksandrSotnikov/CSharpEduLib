@@ -1,0 +1,5 @@
+[
+  {"id":"ex01","title":"Объявление переменных","code":"int a = 10; double d = 3.14; string s = \"text\";"},
+  {"id":"ex02","title":"Минимум/максимум типов","code":"int min = int.MinValue; int max = int.MaxValue;"},
+  {"id":"ex03","title":"Неявные/явные приведения","code":"int i = 42; double x = i; int j = (int)x;"}
+]
