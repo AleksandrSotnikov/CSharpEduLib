@@ -45,6 +45,12 @@
 - Минимум 85% покрытия кода
 - Используйте NUnit для unit-тестов
 
+## Гайд по созданию лекций и примеры
+- Подробный туториал: `docs/tutorials/creating-lectures.md`
+- Эталонная лекция: `src/CSharpEduLib.Content/Lectures/Module_1_Basics/Lecture_1_1/`
+- Шаблон StudentSolution: `src/CSharpEduLib.Content/Lectures/Module_1_Basics/Lecture_1_1/Exercises/Exercise_1_HelloWorld/StudentSolution.cs`
+- Базовый путь для новых лекций: `src/CSharpEduLib.Content/Lectures/`
+
 ## Контакты
 
 Если у вас есть вопросы, не стесняйтесь открыть Issue или начать Discussion!
