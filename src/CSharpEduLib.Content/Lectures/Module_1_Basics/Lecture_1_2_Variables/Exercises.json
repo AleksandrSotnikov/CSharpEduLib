@@ -1,0 +1,232 @@
+{
+  "exercises": [
+    {
+      "id": "exercise1",
+      "title": "Объявление переменных различных типов",
+      "description": "Создайте метод, который объявляет и инициализирует переменные всех основных примитивных типов C#",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise1",
+      "className": "DeclaringVariablesExercise",
+      "methodName": "DeclareAllTypes",
+      "parameters": [],
+      "returnType": "void",
+      "requirements": [
+        "Объявить и инициализировать переменные типов: int, double, float, decimal, long, short, byte",
+        "Объявить переменные типов: bool, char, string",
+        "Вывести значения всех переменных с помощью Console.WriteLine",
+        "Использовать осмысленные имена переменных"
+      ]
+    },
+    {
+      "id": "exercise2",
+      "title": "Преобразование числовых типов",
+      "description": "Реализуйте метод, демонстрирующий различные способы преобразования между числовыми типами",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise2",
+      "className": "TypeConversionsExercise",
+      "methodName": "ConvertNumbers",
+      "parameters": [
+        {
+          "name": "intValue",
+          "type": "int"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Выполнить неявное преобразование int в long и double",
+        "Выполнить явное преобразование double в int",
+        "Показать потерю точности при явном преобразовании",
+        "Вернуть строку с результатами всех преобразований",
+        "Обработать возможное переполнение"
+      ]
+    },
+    {
+      "id": "exercise3",
+      "title": "Преобразование string в int/double",
+      "description": "Создайте метод для безопасного преобразования строк в числовые типы",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise3",
+      "className": "ParseTryParseExercise",
+      "methodName": "SafeParseNumber",
+      "parameters": [
+        {
+          "name": "input",
+          "type": "string"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Использовать TryParse для безопасного преобразования",
+        "Попробовать преобразовать в int, затем в double",
+        "Если преобразование невозможно, вернуть 'Ошибка преобразования'",
+        "Если успешно, вернуть 'Число: {значение}, Тип: {тип}'",
+        "Обработать null и пустые строки"
+      ]
+    },
+    {
+      "id": "exercise4",
+      "title": "MinValue и MaxValue типов",
+      "description": "Реализуйте метод, который выводит минимальные и максимальные значения для различных числовых типов",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise4",
+      "className": "MinMaxExercise",
+      "methodName": "ShowMinMaxValues",
+      "parameters": [
+        {
+          "name": "typeName",
+          "type": "string"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Поддерживать типы: 'int', 'long', 'short', 'byte', 'float', 'double', 'decimal'",
+        "Для каждого типа вернуть строку: 'Тип {type}: от {MinValue} до {MaxValue}'",
+        "Для неизвестного типа вернуть 'Неизвестный тип'",
+        "Использовать switch-конструкцию или if-else"
+      ]
+    },
+    {
+      "id": "exercise5",
+      "title": "Работа с типом char",
+      "description": "Создайте метод для анализа символьных данных",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise5",
+      "className": "CharBasicsExercise",
+      "methodName": "AnalyzeChar",
+      "parameters": [
+        {
+          "name": "character",
+          "type": "char"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Определить, является ли символ буквой (IsLetter)",
+        "Определить, является ли символ цифрой (IsDigit)",
+        "Для букв определить регистр (IsUpper/IsLower)",
+        "Вернуть ASCII код символа",
+        "Результат в формате: 'Символ: {char}, ASCII: {code}, Тип: {type}'"
+      ]
+    },
+    {
+      "id": "exercise6",
+      "title": "Константы и readonly",
+      "description": "Продемонстрируйте различия между const и readonly полями",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise6",
+      "className": "ConstantsExercise",
+      "methodName": "ShowConstants",
+      "parameters": [],
+      "returnType": "string",
+      "requirements": [
+        "Объявить const поля для математических констант (Pi, E)",
+        "Объявить readonly поля для времени создания объекта",
+        "Показать невозможность изменения const и readonly после инициализации",
+        "Вернуть строку со значениями всех констант",
+        "Добавить комментарии о различиях const vs readonly"
+      ]
+    },
+    {
+      "id": "exercise7",
+      "title": "Логические значения bool",
+      "description": "Создайте метод для работы с логическими выражениями и bool переменными",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise7",
+      "className": "BoolLogicExercise",
+      "methodName": "EvaluateConditions",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Сравнить два числа и определить: равны ли они, какое больше",
+        "Проверить четность обоих чисел",
+        "Определить, являются ли оба числа положительными",
+        "Вернуть строку с результатами всех проверок",
+        "Использовать логические операторы &&, ||, !"
+      ]
+    },
+    {
+      "id": "exercise8",
+      "title": "Инициализация по умолчанию",
+      "description": "Продемонстрируйте значения по умолчанию для различных типов данных",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise8",
+      "className": "DefaultsExercise",
+      "methodName": "ShowDefaultValues",
+      "parameters": [],
+      "returnType": "string",
+      "requirements": [
+        "Показать default значения для: int, double, bool, char, string",
+        "Использовать ключевое слово default для получения значений",
+        "Сравнить default значения с явно инициализированными переменными",
+        "Вернуть строку со всеми default значениями",
+        "Объяснить разницу между value types и reference types"
+      ]
+    },
+    {
+      "id": "exercise9",
+      "title": "Обработка overflow",
+      "description": "Изучите поведение программы при переполнении числовых типов",
+      "difficulty": 3,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise9",
+      "className": "OverflowExercise",
+      "methodName": "HandleOverflow",
+      "parameters": [
+        {
+          "name": "testChecked",
+          "type": "bool"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Продемонстрировать переполнение int.MaxValue + 1",
+        "Если testChecked = true, использовать checked контекст",
+        "Если testChecked = false, использовать unchecked контекст",
+        "Обработать OverflowException в checked контексте",
+        "Показать 'зацикливание' значений в unchecked контексте",
+        "Вернуть описание произошедшего"
+      ]
+    },
+    {
+      "id": "exercise10",
+      "title": "Комбинирование разных типов данных",
+      "description": "Создайте комплексный метод, использующий все изученные типы данных и их взаимодействие",
+      "difficulty": 3,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture12.Exercises.Exercise10",
+      "className": "CombiningTypesExercise",
+      "methodName": "ProcessUserData",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "ageStr",
+          "type": "string"
+        },
+        {
+          "name": "salaryStr",
+          "type": "string"
+        }
+      ],
+      "returnType": "string",
+      "requirements": [
+        "Валидировать входные данные (проверка на null/empty)",
+        "Безопасно преобразовать строки в int и decimal",
+        "Определить категорию пользователя по возрасту (ребенок/подросток/взрослый/пенсионер)",
+        "Классифицировать зарплату (низкая/средняя/высокая)",
+        "Использовать string interpolation для форматирования результата",
+        "Обработать ошибки преобразования",
+        "Вернуть полную информацию о пользователе или сообщение об ошибке"
+      ]
+    }
+  ]
+}
