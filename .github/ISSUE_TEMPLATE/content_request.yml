@@ -1,0 +1,50 @@
+name: "Content request: New lecture/module"
+description: "Use this template to propose new educational content (lectures, exercises, examples)"
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо за ваш вклад! Перед началом, ознакомьтесь с гайдом по структуре лекции и примерам:
+        - docs/tutorials/creating-lectures.md
+        - src/CSharpEduLib.Content/Lectures/Module_1_Basics/Lecture_1_1/
+        - src/CSharpEduLib.Content/Lectures/Module_1_Basics/Lecture_1_1/Exercises/Exercise_1_HelloWorld/StudentSolution.cs
+  - type: input
+    id: title
+    attributes:
+      label: Краткое название лекции/модуля
+      placeholder: "Lecture 1.3 — Operators and Expressions"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание
+      description: Кратко опишите содержание и цели
+    validations:
+      required: true
+  - type: textarea
+    id: structure
+    attributes:
+      label: Структура файлов
+      description: Перечислите файлы (Theory.md, CodeExamples.md, Examples.json, Exercises/..., QA.md)
+  - type: textarea
+    id: examples
+    attributes:
+      label: Примеры кода
+      description: Кол-во и краткое описание
+  - type: textarea
+    id: exercises
+    attributes:
+      label: Упражнения и тесты
+      description: Кол-во упражнений, сигнатуры методов StudentSolution.Run(...), подход к тестам
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Чек-лист готовности
+      options:
+        - label: Теория (Theory.md) подготовлена
+        - label: Примеры (CodeExamples.md + Examples.json) подготовлены и синхронизированы
+        - label: Exercises/ созданы, StudentSolution.cs добавлены с TODO
+        - label: Тесты предусмотрены/подготовлены
+        - label: Соответствие неймспейсов и путей шаблону Lecture_1_1
