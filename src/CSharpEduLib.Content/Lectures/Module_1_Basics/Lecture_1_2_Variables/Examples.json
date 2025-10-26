@@ -1,5 +1,16 @@
-[
-  {"id":"ex01","title":"Объявление переменных","code":"int a = 10; double d = 3.14; string s = \"text\";"},
-  {"id":"ex02","title":"Минимум/максимум типов","code":"int min = int.MinValue; int max = int.MaxValue;"},
-  {"id":"ex03","title":"Неявные/явные приведения","code":"int i = 42; double x = i; int j = (int)x;"}
-]
+{
+  "examples": [
+    {"id":"ex01","title":"Объявление переменных","code":"int a = 10; double d = 3.14; string s = \"text\"; bool ok = true; char ch = 'A';"},
+    {"id":"ex02","title":"Минимум/максимум типов","code":"int min = int.MinValue; int max = int.MaxValue; long lmin = long.MinValue; long lmax = long.MaxValue;"},
+    {"id":"ex03","title":"Неявные/явные приведения","code":"int i = 42; double x = i; int j = (int)x;"},
+    {"id":"ex04","title":"checked переполнение","code":"checked { int max = int.MaxValue; /* int overflow = max + 1; */ }"},
+    {"id":"ex05","title":"unchecked переполнение","code":"unchecked { int max = int.MaxValue; int wrap = max + 1; }"},
+    {"id":"ex06","title":"Parse/TryParse","code":"int a = int.Parse(\"123\"); bool ok = int.TryParse(\"123\", out int b);"},
+    {"id":"ex07","title":"Культура для double","code":"var ci = new System.Globalization.CultureInfo(\"en-US\"); double v = double.Parse(\"3.14\", ci);"},
+    {"id":"ex08","title":"Константы","code":"const double Pi = 3.14159;"},
+    {"id":"ex09","title":"Значения по умолчанию","code":"int iDefault = default; bool bDefault = default;"},
+    {"id":"ex10","title":"Тип char","code":"char c1 = 'A'; char c2 = (char)65;"},
+    {"id":"ex11","title":"Интерполяция строк","code":"int n = 5; string s = $\"n = {n}\";"},
+    {"id":"ex12","title":"Преобразования decimal","code":"decimal m = 10.5m; double d2 = (double)m; decimal m2 = (decimal)d2;"}
+  ]
+}
