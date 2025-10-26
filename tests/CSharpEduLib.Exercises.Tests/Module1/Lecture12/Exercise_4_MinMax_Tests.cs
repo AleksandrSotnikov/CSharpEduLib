@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using System.Globalization;
+using CSharpEduLib.Content.Module1.Lecture12.Exercises;
 
 namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
 {
@@ -9,9 +9,11 @@ namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
         [Test]
         public void ShouldExposeCorrectMinMaxForIntAndLong()
         {
-            // TODO: заменить на реальные вызовы решений
-            Assert.That(int.MinValue, Is.LessThan(0));
-            Assert.That(long.MaxValue, Is.GreaterThan(0));
+            var (imin, imax, lmin, lmax) = Exercise_4_MinMax.Run();
+            Assert.AreEqual(int.MinValue, imin);
+            Assert.AreEqual(int.MaxValue, imax);
+            Assert.AreEqual(long.MinValue, lmin);
+            Assert.AreEqual(long.MaxValue, lmax);
         }
     }
 }

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using CSharpEduLib.Content.Module1.Lecture12.Exercises;
 
 namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
 {
@@ -8,8 +9,8 @@ namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
         [Test]
         public void ShouldDeclareBasicTypes()
         {
-            // TODO: подключить решение упражнения и проверить ожидаемые значения
-            Assert.Pass();
+            var result = Exercise_1_DeclaringVariables.Run();
+            Assert.IsTrue(result.StartsWith("10|3.14|text|True|A"));
         }
     }
 }

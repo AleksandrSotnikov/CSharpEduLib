@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using CSharpEduLib.Content.Module1.Lecture12.Exercises;
 
 namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
 {
@@ -8,7 +9,7 @@ namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
         [Test]
         public void ShouldMapCharFromCode()
         {
-            char c = (char)65;
+            var c = Exercise_5_CharBasics.Run(65);
             Assert.AreEqual('A', c);
         }
     }
