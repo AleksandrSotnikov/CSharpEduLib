@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using CSharpEduLib.Content.Module1.Lecture12.Exercises;
 
 namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
 {
@@ -8,7 +9,7 @@ namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
         [Test]
         public void ShouldCombineVariousTypes()
         {
-            int i = 10; double d = 2.5; string s = $"{i}-{d}";
+            var s = Exercise_10_CombiningTypes.Run(10, 2.5);
             Assert.AreEqual("10-2.5", s);
         }
     }

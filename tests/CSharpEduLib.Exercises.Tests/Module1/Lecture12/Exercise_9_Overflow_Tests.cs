@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using CSharpEduLib.Content.Module1.Lecture12.Exercises;
 
 namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
 {
@@ -8,12 +9,8 @@ namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
         [Test]
         public void ShouldOverflowInUnchecked()
         {
-            unchecked
-            {
-                int max = int.MaxValue;
-                int wrap = max + 1;
-                Assert.Less(wrap, 0);
-            }
+            int wrap = Exercise_9_Overflow.Run();
+            Assert.Less(wrap, 0);
         }
     }
 }

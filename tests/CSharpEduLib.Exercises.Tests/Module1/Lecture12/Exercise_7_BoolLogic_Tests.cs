@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using CSharpEduLib.Content.Module1.Lecture12.Exercises;
 
 namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
 {
@@ -8,8 +9,8 @@ namespace CSharpEduLib.Exercises.Tests.Module1.Lecture12
         [Test]
         public void ShouldEvaluateBoolExpressions()
         {
-            bool a = true, b = false;
-            Assert.IsTrue(a && !b);
+            Assert.IsTrue(Exercise_7_BoolLogic.Run(true, false));
+            Assert.IsFalse(Exercise_7_BoolLogic.Run(false, false));
         }
     }
 }
