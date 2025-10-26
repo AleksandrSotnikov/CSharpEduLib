@@ -1,0 +1,129 @@
+{
+  "examples": [
+    {
+      "id": "ex01",
+      "title": "Простой if",
+      "code": "int age = 18;\nif (age >= 18)\n{\n    Console.WriteLine(\"Вы совершеннолетний!\");\n}"
+    },
+    {
+      "id": "ex02",
+      "title": "Простой if-else",
+      "code": "int number = 7;\nif (number % 2 == 0)\n{\n    Console.WriteLine(\"Число четное\");\n}\nelse\n{\n    Console.WriteLine(\"Число нечетное\");\n}"
+    },
+    {
+      "id": "ex03",
+      "title": "if-else if-else",
+      "code": "int score = 85;\nif (score >= 90)\n{\n    Console.WriteLine(\"Оценка: 5\");\n}\nelse if (score >= 80)\n{\n    Console.WriteLine(\"Оценка: 4\");\n}\nelse if (score >= 70)\n{\n    Console.WriteLine(\"Оценка: 3\");\n}\nelse\n{\n    Console.WriteLine(\"Оценка: 2\");\n}"
+    },
+    {
+      "id": "ex04",
+      "title": "Сложные логические условия",
+      "code": "int temperature = 25;\nbool isRaining = false;\n\nif (temperature > 20 && !isRaining)\n{\n    Console.WriteLine(\"Отличный день для прогулки!\");\n}\nelse\n{\n    Console.WriteLine(\"Не очень подходящая погода\");\n}"
+    },
+    {
+      "id": "ex05",
+      "title": "Тернарный оператор",
+      "code": "int x = 10;\nstring result = x > 5 ? \"Больше 5\" : \"Меньше или равно 5\";\nConsole.WriteLine(result);"
+    },
+    {
+      "id": "ex06",
+      "title": "Классический switch",
+      "code": "string dayOfWeek = \"Monday\";\nswitch (dayOfWeek)\n{\n    case \"Monday\":\n        Console.WriteLine(\"Понедельник - начало недели\");\n        break;\n    case \"Friday\":\n        Console.WriteLine(\"Пятница - конец рабочей недели\");\n        break;\n    default:\n        Console.WriteLine(\"Обычный день\");\n        break;\n}"
+    },
+    {
+      "id": "ex07",
+      "title": "Switch с числами",
+      "code": "int month = 12;\nswitch (month)\n{\n    case 12:\n    case 1:\n    case 2:\n        Console.WriteLine(\"Зима\");\n        break;\n    case 3:\n    case 4:\n    case 5:\n        Console.WriteLine(\"Весна\");\n        break;\n    default:\n        Console.WriteLine(\"Некорректный месяц\");\n        break;\n}"
+    },
+    {
+      "id": "ex08",
+      "title": "Switch expression",
+      "code": "int dayNumber = 1;\nstring dayName = dayNumber switch\n{\n    1 => \"Понедельник\",\n    2 => \"Вторник\",\n    3 => \"Среда\",\n    _ => \"Неизвестный день\"\n};\nConsole.WriteLine(dayName);"
+    },
+    {
+      "id": "ex09",
+      "title": "Проверка диапазона",
+      "code": "int value = 50;\nif (value >= 1 && value <= 100)\n{\n    Console.WriteLine(\"Значение в допустимом диапазоне\");\n}\nelse\n{\n    Console.WriteLine(\"Значение вне диапазона\");\n}"
+    },
+    {
+      "id": "ex10",
+      "title": "Логика булевых переменных",
+      "code": "bool hasPermission = true;\nbool isLoggedIn = false;\n\nif (hasPermission && isLoggedIn)\n{\n    Console.WriteLine(\"Доступ разрешен\");\n}\nelse if (!isLoggedIn)\n{\n    Console.WriteLine(\"Необходимо войти в систему\");\n}"
+    },
+    {
+      "id": "ex11",
+      "title": "Калькулятор",
+      "code": "double num1 = 10;\ndouble num2 = 3;\nchar operation = '/';\ndouble result;\n\nswitch (operation)\n{\n    case '+': result = num1 + num2; break;\n    case '-': result = num1 - num2; break;\n    case '*': result = num1 * num2; break;\n    case '/':\n        result = num2 != 0 ? num1 / num2 : 0;\n        break;\n    default: result = 0; break;\n}\nConsole.WriteLine($\"Результат: {result:F2}\");"
+    },
+    {
+      "id": "ex12",
+      "title": "Возрастные категории",
+      "code": "int age = 16;\nstring category = age < 13 ? \"Ребенок\" : age < 20 ? \"Подросток\" : age < 60 ? \"Взрослый\" : \"Пенсионер\";\nConsole.WriteLine($\"Возрастная категория: {category}\");"
+    },
+    {
+      "id": "ex13",
+      "title": "Временные приветствия",
+      "code": "int hour = 14;\nstring greeting = hour >= 5 && hour < 12 ? \"Доброе утро!\" : hour >= 12 && hour < 17 ? \"Добрый день!\" : hour >= 17 && hour < 22 ? \"Добрый вечер!\" : \"Доброй ночи!\";\nConsole.WriteLine(greeting);"
+    },
+    {
+      "id": "ex14",
+      "title": "Проверка символа",
+      "code": "char symbol = 'A';\nif (char.IsLetter(symbol))\n{\n    Console.WriteLine(char.IsUpper(symbol) ? \"Символ - заглавная буква\" : \"Символ - строчная буква\");\n}\nelse if (char.IsDigit(symbol))\n{\n    Console.WriteLine(\"Символ - цифра\");\n}"
+    },
+    {
+      "id": "ex15",
+      "title": "Early return",
+      "code": "int CheckNumber(int number)\n{\n    if (number < 0) return -1;\n    if (number == 0) return 0;\n    return 1;\n}\nint result = CheckNumber(-5);\nConsole.WriteLine($\"Результат: {result}\");"
+    },
+    {
+      "id": "ex16",
+      "title": "Switch с enum",
+      "code": "enum Status { Active, Inactive, Pending }\nStatus userStatus = Status.Pending;\nstring message = userStatus switch\n{\n    Status.Active => \"Пользователь активен\",\n    Status.Inactive => \"Пользователь неактивен\",\n    Status.Pending => \"Ожидает подтверждения\",\n    _ => \"Неизвестный статус\"\n};\nConsole.WriteLine(message);"
+    },
+    {
+      "id": "ex17",
+      "title": "Валидация пароля",
+      "code": "string password = \"MyPass123\";\nbool isValid = password.Length >= 8 && password.Any(char.IsDigit) && password.Any(char.IsUpper);\nConsole.WriteLine(isValid ? \"Пароль корректный!\" : \"Пароль не соответствует требованиям\");"
+    },
+    {
+      "id": "ex18",
+      "title": "Сортировка трех чисел",
+      "code": "int a = 5, b = 2, c = 8;\nint max = a >= b && a >= c ? a : b >= c ? b : c;\nint min = a <= b && a <= c ? a : b <= c ? b : c;\nint mid = a + b + c - max - min;\nConsole.WriteLine($\"По убыванию: {max}, {mid}, {min}\");"
+    },
+    {
+      "id": "ex19",
+      "title": "Високосный год",
+      "code": "int year = 2024;\nbool isLeapYear = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);\nConsole.WriteLine(isLeapYear ? $\"{year} - високосный год\" : $\"{year} - обычный год\");"
+    },
+    {
+      "id": "ex20",
+      "title": "Квадрант координат",
+      "code": "int x = 3, y = -2;\nstring quadrant = (x, y) switch\n{\n    (> 0, > 0) => \"I квадрант\",\n    (< 0, > 0) => \"II квадрант\",\n    (< 0, < 0) => \"III квадрант\",\n    (> 0, < 0) => \"IV квадрант\",\n    (0, _) => \"На оси X\",\n    (_, 0) => \"На оси Y\"\n};\nConsole.WriteLine($\"Точка ({x}, {y}) находится в: {quadrant}\");"
+    },
+    {
+      "id": "ex21",
+      "title": "Проверка треугольника",
+      "code": "int a = 3, b = 4, c = 5;\nbool isTriangle = a + b > c && a + c > b && b + c > a;\nif (isTriangle)\n{\n    if (a == b && b == c) Console.WriteLine(\"Равносторонний\");\n    else if (a == b || b == c || a == c) Console.WriteLine(\"Равнобедренный\");\n    else Console.WriteLine(\"Обычный\");\n}\nelse Console.WriteLine(\"Не треугольник\");"
+    },
+    {
+      "id": "ex22",
+      "title": "Многоуровневое меню",
+      "code": "int mainChoice = 2, subChoice = 1;\nswitch (mainChoice)\n{\n    case 1:\n        Console.WriteLine(\"Настройки\");\n        break;\n    case 2:\n        Console.WriteLine(\"Графика\");\n        Console.WriteLine(subChoice == 1 ? \" - Разрешение\" : subChoice == 2 ? \" - Качество\" : \" - Неизвестная опция\");\n        break;\n    default:\n        Console.WriteLine(\"Неизвестный раздел\");\n        break;\n}"
+    },
+    {
+      "id": "ex23",
+      "title": "Проверка null",
+      "code": "string userName = null;\nif (string.IsNullOrEmpty(userName))\n{\n    Console.WriteLine(\"Пользователь не указал имя\");\n}\nelse\n{\n    Console.WriteLine($\"Привет, {userName}!\");\n}"
+    },
+    {
+      "id": "ex24",
+      "title": "Определение числовой категории",
+      "code": "int number = 25;\nstring category = number switch\n{\n    0 => \"Ноль\",\n    > 0 and <= 10 => \"Малое число\",\n    > 10 and <= 50 => \"Среднее число\",\n    > 50 and <= 100 => \"Большое число\",\n    < 0 => \"Отрицательное\",\n    _ => \"Очень большое\"\n};\nConsole.WriteLine($\"Число {number}: {category}\");"
+    },
+    {
+      "id": "ex25",
+      "title": "Комбинированная валидация",
+      "code": "string input = \"25\";\nbool isValid = !string.IsNullOrWhiteSpace(input) && int.TryParse(input, out int number) && number >= 0 && number <= 100;\n\nif (isValid)\n{\n    string result = (number % 2 == 0 ? \"Четное\" : \"Нечетное\") + \" \" + (number > 50 ? \"большое\" : \"маленькое\");\n    Console.WriteLine($\"Число {number}: {result}\");\n}\nelse\n{\n    Console.WriteLine(\"Ошибка ввода!\");\n}"
+    }
+  ]
+}
