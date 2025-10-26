@@ -1,0 +1,178 @@
+{
+  "exercises": [
+    {
+      "id": "exercise1",
+      "title": "Калькулятор двух чисел",
+      "description": "Реализуйте калькулятор для операций +, -, *, / и %",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise1",
+      "className": "TwoNumberCalculator",
+      "methodName": "Calculate",
+      "parameters": [
+        {"name": "a", "type": "int"},
+        {"name": "b", "type": "int"},
+        {"name": "op", "type": "char"}
+      ],
+      "returnType": "int",
+      "requirements": [
+        "+, -, *, %, '/' с проверкой деления на 0 (бросить DivideByZeroException)",
+        "Неизвестная операция: бросить ArgumentException"
+      ]
+    },
+    {
+      "id": "exercise2",
+      "title": "Определение чётности",
+      "description": "Вернуть 'Even' или 'Odd' в зависимости от числа",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise2",
+      "className": "ParityChecker",
+      "methodName": "GetParity",
+      "parameters": [{"name": "n", "type": "int"}],
+      "returnType": "string",
+      "requirements": [
+        "Использовать оператор %",
+        "Обработать отрицательные числа корректно"
+      ]
+    },
+    {
+      "id": "exercise3",
+      "title": "Проверка диапазона",
+      "description": "Определите, принадлежит ли число полуинтервалу [min, max)",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise3",
+      "className": "RangeCheck",
+      "methodName": "IsInRange",
+      "parameters": [
+        {"name": "value", "type": "int"},
+        {"name": "min", "type": "int"},
+        {"name": "max", "type": "int"}
+      ],
+      "returnType": "bool",
+      "requirements": [
+        "Вернуть true для min <= value < max",
+        "Если min >= max, бросить ArgumentException"
+      ]
+    },
+    {
+      "id": "exercise4",
+      "title": "Логические выражения",
+      "description": "Вернуть true, если x < y и оба положительны, либо z == 0",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise4",
+      "className": "LogicExpressions",
+      "methodName": "Evaluate",
+      "parameters": [
+        {"name": "x", "type": "int"},
+        {"name": "y", "type": "int"},
+        {"name": "z", "type": "int"}
+      ],
+      "returnType": "bool",
+      "requirements": [
+        "Использовать && и || с правильным приоритетом",
+        "Не допускать лишних вычислений (short-circuit)"
+      ]
+    },
+    {
+      "id": "exercise5",
+      "title": "Операторы присваивания",
+      "description": "Примените +=, -=, *=, /=, %= к числу по заданной последовательности",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise5",
+      "className": "AssignmentOps",
+      "methodName": "ApplySequence",
+      "parameters": [{"name": "start", "type": "int"}],
+      "returnType": "int",
+      "requirements": [
+        "+= 5, *= 3, -= 2, /= 2, %= 5 (в указанном порядке)",
+        "Вернуть итоговое значение"
+      ]
+    },
+    {
+      "id": "exercise6",
+      "title": "Совмещенные операторы и приоритет",
+      "description": "Рассчитать выражение a++ + ++b * c-- корректно",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise6",
+      "className": "CombinedOperators",
+      "methodName": "Compute",
+      "parameters": [
+        {"name": "a", "type": "int"},
+        {"name": "b", "type": "int"},
+        {"name": "c", "type": "int"}
+      ],
+      "returnType": "int",
+      "requirements": [
+        "Соблюдать порядок инкремента/декремента",
+        "Вернуть результат выражения"
+      ]
+    },
+    {
+      "id": "exercise7",
+      "title": "Последовательность выполнения",
+      "description": "Продемонстрируйте, как меняются значения при a = -a++ + ++a",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise7",
+      "className": "EvaluationOrder",
+      "methodName": "Evaluate",
+      "parameters": [{"name": "a", "type": "int"}],
+      "returnType": "int",
+      "requirements": [
+        "Вернуть итоговое значение a",
+        "Добавить комментарии по шагам (в коде шаблона)"
+      ]
+    },
+    {
+      "id": "exercise8",
+      "title": "Приоритет операторов",
+      "description": "Вернуть разные результаты для 2 + 3 * 4 и (2 + 3) * 4",
+      "difficulty": 1,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise8",
+      "className": "OperatorPrecedence",
+      "methodName": "Compare",
+      "parameters": [],
+      "returnType": "int[]",
+      "requirements": [
+        "Вернуть массив из двух элементов: [без скобок, со скобками]"
+      ]
+    },
+    {
+      "id": "exercise9",
+      "title": "Математические вычисления",
+      "description": "Рассчитать выражение round((a/b), 2) * c с учётом double",
+      "difficulty": 2,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise9",
+      "className": "MathCompute",
+      "methodName": "Compute",
+      "parameters": [
+        {"name": "a", "type": "int"},
+        {"name": "b", "type": "int"},
+        {"name": "c", "type": "double"}
+      ],
+      "returnType": "double",
+      "requirements": [
+        "Деление выполнить в double",
+        "Округлить до 2 знаков Math.Round",
+        "Проверить деление на 0 (ArgumentException)"
+      ]
+    },
+    {
+      "id": "exercise10",
+      "title": "Комбинированные операции",
+      "description": "Рассчитать (a++ * --b) + (c >> 1) - (a & b)",
+      "difficulty": 3,
+      "namespace": "CSharpEduLib.Content.Lectures.Module1.Lecture13.Exercises.Exercise10",
+      "className": "CombinedAdvanced",
+      "methodName": "Compute",
+      "parameters": [
+        {"name": "a", "type": "int"},
+        {"name": "b", "type": "int"},
+        {"name": "c", "type": "int"}
+      ],
+      "returnType": "int",
+      "requirements": [
+        "Корректно применить побитовые и инкременты",
+        "Вернуть итог"
+      ]
+    }
+  ]
+}
